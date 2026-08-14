@@ -3,6 +3,7 @@ package eu.kanade.tachiyomi.extension.ar.mangapro
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.Log
+import android.webkit.CookieManager
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.network.asObservableSuccess
@@ -14,7 +15,6 @@ import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.model.SChapter
 import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.online.HttpSource
-import keiyoushi.lib.cookieinterceptor.CookieInterceptor
 import keiyoushi.utils.extractNextJs
 import keiyoushi.utils.extractNextJsRsc
 import keiyoushi.utils.firstInstance
@@ -27,7 +27,9 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import okhttp3.Call
 import okhttp3.Callback
+import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Protocol
@@ -51,24 +53,108 @@ import javax.crypto.spec.SecretKeySpec
 import kotlin.io.encoding.Base64
 
 class ProChan : HttpSource() {
-    override val name = "ProChan"
+    override val name = "ProComic"
     override val lang = "ar"
-    private val domain = "prochan.net"
+    private val domain = "procomic.pro"
     override val baseUrl = "https://$domain"
     override val supportsLatest = true
     override val versionId = 5
 
+    private val cookieManager by lazy { CookieManager.getInstance() }
+
+    private fun webViewCookieInterceptor(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val url = request.url
+        val urlHost = url.host
+        val urlString = url.toString()
+
+        val primaryCookies = try {
+            cookieManager.getCookie(urlString)
+        } catch (_: Exception) {
+            null
+        }
+        val proCookies = try {
+            cookieManager.getCookie("https://procomic.pro/")
+        } catch (_: Exception) {
+            null
+        }
+        val chanCookies = try {
+            cookieManager.getCookie("https://prochan.pro/")
+        } catch (_: Exception) {
+            null
+        }
+        val netCookies = try {
+            cookieManager.getCookie("https://procomic.net/")
+        } catch (_: Exception) {
+            null
+        }
+        val appCookies = try {
+            cookieManager.getCookie("https://app.procomic.pro/")
+        } catch (_: Exception) {
+            null
+        }
+
+        // Also fetch cookies for cdn subdomains if this is a CDN request
+        val cdnCookies = if (urlHost.startsWith("cdn")) {
+            try {
+                cookieManager.getCookie("https://$urlHost/")
+            } catch (_: Exception) {
+                null
+            }
+        } else {
+            null
+        }
+
+        val requestCookieHeader = request.header("Cookie")
+        val cookieMap = LinkedHashMap<String, String>()
+
+        requestCookieHeader?.split("; ")?.forEach { pair ->
+            val parts = pair.split("=", limit = 2)
+            if (parts.size == 2) cookieMap[parts[0].trim()] = parts[1].trim()
+        }
+
+        sequenceOf(proCookies, chanCookies, netCookies, appCookies, cdnCookies, primaryCookies).filterNotNull().forEach { cookieStr ->
+            cookieStr.split("; ").forEach { pair ->
+                val parts = pair.split("=", limit = 2)
+                if (parts.size == 2) {
+                    val key = parts[0].trim()
+                    val value = parts[1].trim()
+                    if (key.isNotEmpty() && value.isNotEmpty()) {
+                        cookieMap[key] = value
+                    }
+                }
+            }
+        }
+
+        if (!cookieMap.containsKey("safe_browsing")) {
+            cookieMap["safe_browsing"] = "off"
+        }
+        if (!cookieMap.containsKey("language")) {
+            cookieMap["language"] = "ar"
+        }
+
+        val mergedCookieHeader = cookieMap.entries.joinToString("; ") { "${it.key}=${it.value}" }
+        val newRequest = request.newBuilder()
+            .header("Cookie", mergedCookieHeader)
+            .build()
+
+        val response = chain.proceed(newRequest)
+
+        val setCookies = response.headers("Set-Cookie")
+        if (setCookies.isNotEmpty()) {
+            for (cookie in setCookies) {
+                try {
+                    cookieManager.setCookie(urlString, cookie)
+                } catch (_: Exception) { }
+            }
+        }
+
+        return response
+    }
+
     override val client = network.cloudflareClient.newBuilder()
         .addInterceptor(::scrambledImageInterceptor)
-        .addNetworkInterceptor(
-            CookieInterceptor(
-                domain,
-                listOf(
-                    "safe_browsing" to "off",
-                    "language" to "ar",
-                ),
-            ),
-        )
+        .addInterceptor(::webViewCookieInterceptor)
         .build()
 
     override fun headersBuilder() = super.headersBuilder()
@@ -79,21 +165,45 @@ class ProChan : HttpSource() {
         .set("rsc", "1")
         .build()
 
-    override fun fetchPopularManga(page: Int): Observable<MangasPage> {
-        val filters = getFilterList().apply {
-            firstInstance<SortFilter>().state = 2
-        }
+    override fun popularMangaRequest(page: Int): Request = GET("$baseUrl/api/public/manga?page=$page&limit=20", headers)
 
-        return fetchSearchManga(page, "", filters)
+    override fun popularMangaParse(response: Response): MangasPage {
+        val data = response.parseAs<MetaData<BrowseManga>>()
+        val mangas = data.data.asSequence()
+            .filter { it.type in SUPPORTED_TYPES }
+            .map { it.toSManga() }
+            .toList()
+
+        return MangasPage(mangas, data.meta.hasNextPage())
     }
 
-    override fun fetchLatestUpdates(page: Int): Observable<MangasPage> {
-        val filters = getFilterList().apply {
-            firstInstance<SortFilter>().state = 1
-        }
+    override fun fetchPopularManga(page: Int): Observable<MangasPage> = client.newCall(popularMangaRequest(page))
+        .asObservableSuccess()
+        .map(::popularMangaParse)
 
-        return fetchSearchManga(page, "", filters)
+    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/api/public/content/latest-updates?page=$page", headers)
+
+    override fun latestUpdatesParse(response: Response): MangasPage {
+        val data = response.parseAs<Data<List<LatestUpdate>>>().data
+        val mangas = data.asSequence()
+            .filter { it.type in SUPPORTED_TYPES }
+            .distinctBy { "${it.type}/${it.mangaId}" }
+            .map { update ->
+                SManga.create().apply {
+                    url = "/ar/series/${update.type}/${update.mangaId}/${update.mangaSlug}"
+                    title = update.mangaTitle
+                    thumbnail_url = update.coverImage.toImageUrl(update.cdn)
+                }
+            }
+            .toList()
+
+        val hasNextPage = data.size >= 18
+        return MangasPage(mangas, hasNextPage)
     }
+
+    override fun fetchLatestUpdates(page: Int): Observable<MangasPage> = client.newCall(latestUpdatesRequest(page))
+        .asObservableSuccess()
+        .map(::latestUpdatesParse)
 
     private val pageNumber = ConcurrentHashMap<String, Int>()
 
@@ -107,23 +217,24 @@ class ProChan : HttpSource() {
         if (query.startsWith("https://")) {
             val url = query.toHttpUrl()
             val path = url.pathSegments
-            if (url.host == domain && path.size >= 4 && path[0] == "series") {
-                val type = path[1]
+            val seriesIndex = path.indexOf("series")
+            if (url.host == domain && seriesIndex >= 0 && path.size > seriesIndex + 3) {
+                val type = path[seriesIndex + 1]
                 if (type !in SUPPORTED_TYPES) {
-                    throw Exception("نوع غير مدعوم")
+                    throw Exception("Ù†ÙˆØ¹ ØºÙŠØ± Ù…Ø¯Ø¹ÙˆÙ…")
                 }
-                val mangaId = path[2]
-                val slug = path[3]
+                val mangaId = path[seriesIndex + 2]
+                val slug = path[seriesIndex + 3]
 
                 val manga = SManga.create().apply {
-                    this@apply.url = "/series/$type/$mangaId/$slug"
+                    this@apply.url = "/ar/series/$type/$mangaId/$slug"
                 }
 
                 return fetchMangaDetails(manga).map {
                     MangasPage(listOf(it), false)
                 }
             } else {
-                throw Exception("رابط غير مدعوم")
+                throw Exception("Ø±Ø§Ø¨Ø· ØºÙŠØ± Ù…Ø¯Ø¹ÙˆÙ…")
             }
         }
 
@@ -161,21 +272,7 @@ class ProChan : HttpSource() {
                     .filter { manga ->
                         tagFilter.excluded.none { it in manga.metadata.tags }
                     }
-                    .map { manga ->
-                        SManga.create().apply {
-                            url = "/series/${manga.type}/${manga.id}/${manga.slug}"
-                            title = manga.title
-                            thumbnail_url = (manga.coverImageApp?.desktop ?: manga.coverImage)?.let {
-                                if (it.startsWith("/")) {
-                                    manga.cdn?.let { cdn ->
-                                        "https://$cdn.$domain$it"
-                                    }
-                                } else {
-                                    it
-                                }
-                            }
-                        }
-                    }
+                    .map { it.toSManga() }
                     .toList()
 
                 MangasPage(mangas, data.meta.hasNextPage())
@@ -192,23 +289,26 @@ class ProChan : HttpSource() {
     }
 
     override fun searchMangaRequest(page: Int, query: String, filters: FilterList): Request {
-        val url = "$baseUrl/api/public/series/search".toHttpUrl().newBuilder().apply {
-            addQueryParameter("status", "approved")
-            addQueryParameter("limit", "18")
+        val selectedType = filters.firstInstance<TypeFilter>().selected ?: "manga"
+        val url = "$baseUrl/api/public/$selectedType".toHttpUrl().newBuilder().apply {
+            addQueryParameter("limit", "20")
             addQueryParameter("page", page.toString())
-            query.takeIf(String::isNotBlank)?.also { query ->
-                addQueryParameter("search", query)
-            }
-            filters.firstInstance<TypeFilter>().selected?.also { type ->
-                addQueryParameter("type", type)
-            }
-            addQueryParameter("sort", filters.firstInstance<SortFilter>().selected)
-            filters.firstInstance<YearFilter>().selected?.also { year ->
-                addQueryParameter("year", year)
+            query.takeIf(String::isNotBlank)?.also { q ->
+                addQueryParameter("search", q)
             }
         }.build()
 
         return GET(url, headers)
+    }
+
+    override fun searchMangaParse(response: Response): MangasPage {
+        val data = response.parseAs<MetaData<BrowseManga>>()
+        val mangas = data.data.asSequence()
+            .filter { it.type in SUPPORTED_TYPES }
+            .map { it.toSManga() }
+            .toList()
+
+        return MangasPage(mangas, data.meta.hasNextPage())
     }
 
     override fun getFilterList() = FilterList(
@@ -222,13 +322,138 @@ class ProChan : HttpSource() {
 
     override fun mangaDetailsRequest(manga: SManga): Request = GET(getMangaUrl(manga), rscHeaders)
 
-    override fun getMangaUrl(manga: SManga): String = "$baseUrl${manga.url}"
+    override fun getMangaUrl(manga: SManga): String = "$baseUrl${manga.url.localizedPath()}"
+
+    private data class NextJsResult<T>(
+        val data: T,
+        val effectiveUrl: okhttp3.HttpUrl,
+    )
+
+    private inline fun <reified T> extractNextJsFollowingMove(
+        response: Response,
+    ): NextJsResult<T> {
+        val reqUrl = response.request.url
+        val contentType = response.header("Content-Type") ?: ""
+        val locationHeader = response.header("Location") ?: ""
+
+        val bodyString = try {
+            response.peekBody(1024 * 1024).string()
+        } catch (_: Exception) {
+            ""
+        }
+
+        val firstData: T? = when {
+            "text/x-component" in contentType -> bodyString.extractNextJsRsc<T>()
+            "text/html" in contentType -> org.jsoup.Jsoup.parse(bodyString, reqUrl.toString()).extractNextJs<T>()
+            else -> null
+        }
+
+        if (firstData != null) {
+            return NextJsResult(firstData, response.request.url)
+        }
+
+        val rawTargetUrl = if (locationHeader.isNotBlank()) {
+            locationHeader
+        } else {
+            parseMovedBounceTargetUrl(bodyString)
+                ?: throw IOException("ProComic: expected ${T::class.simpleName}; no moved-series target")
+        }
+
+        val parsedUrl = rawTargetUrl.toHttpUrlOrNull()
+            ?: throw IOException("ProComic: invalid moved target URL: $rawTargetUrl")
+
+        if (parsedUrl.scheme != "http" && parsedUrl.scheme != "https") {
+            throw IOException("ProComic: unsupported scheme in moved target URL: ${parsedUrl.scheme}")
+        }
+
+        if (parsedUrl.host !in ALLOWED_DOMAINS) {
+            throw IOException("ProComic: untrusted host in moved target URL: ${parsedUrl.host}")
+        }
+
+        val movedRequest = response.request.newBuilder()
+            .url(parsedUrl)
+            .build()
+
+        val (firstDataMoved, firstUrl) = client.newCall(movedRequest).execute().use { movedResponse ->
+            val movedBodyString = try {
+                movedResponse.peekBody(1024 * 1024).string()
+            } catch (_: Exception) {
+                ""
+            }
+            val movedContentType = movedResponse.header("Content-Type") ?: ""
+            val movedExtracted: T? = if (movedResponse.isSuccessful) {
+                when {
+                    "text/x-component" in movedContentType -> movedBodyString.extractNextJsRsc<T>()
+                    "text/html" in movedContentType -> org.jsoup.Jsoup.parse(movedBodyString, movedResponse.request.url.toString()).extractNextJs<T>()
+                    else -> null
+                }
+            } else {
+                null
+            }
+
+            if (movedExtracted != null) {
+                movedExtracted to movedResponse.request.url
+            } else {
+                null
+            }
+        } ?: (null to null)
+
+        if (firstDataMoved != null && firstUrl != null) {
+            return NextJsResult(firstDataMoved, firstUrl)
+        }
+
+        val pathSegments = parsedUrl.pathSegments
+        val seriesIdx = pathSegments.indexOf("series")
+        if (seriesIdx >= 0 && pathSegments.size > seriesIdx + 3) {
+            val currentType = pathSegments[seriesIdx + 1]
+
+            for (fallbackType in SUPPORTED_TYPES) {
+                if (fallbackType == currentType) continue
+                val fallbackUrl = parsedUrl.newBuilder()
+                    .setPathSegment(seriesIdx + 1, fallbackType)
+                    .build()
+                val fallbackRequest = response.request.newBuilder()
+                    .url(fallbackUrl)
+                    .build()
+
+                val (fbData, fbUrl) = client.newCall(fallbackRequest).execute().use { fbResp ->
+                    val fbBodyString = try {
+                        fbResp.peekBody(1024 * 1024).string()
+                    } catch (_: Exception) {
+                        ""
+                    }
+                    val fbContentType = fbResp.header("Content-Type") ?: ""
+                    val fbExtracted: T? = if (fbResp.isSuccessful) {
+                        when {
+                            "text/x-component" in fbContentType -> fbBodyString.extractNextJsRsc<T>()
+                            "text/html" in fbContentType -> org.jsoup.Jsoup.parse(fbBodyString, fbResp.request.url.toString()).extractNextJs<T>()
+                            else -> null
+                        }
+                    } else {
+                        null
+                    }
+
+                    if (fbExtracted != null) {
+                        fbExtracted to fbResp.request.url
+                    } else {
+                        null
+                    }
+                } ?: (null to null)
+
+                if (fbData != null && fbUrl != null) {
+                    return NextJsResult(fbData, fbUrl)
+                }
+            }
+        }
+
+        throw IOException("ProComic moved-series response missing ${T::class.simpleName}")
+    }
 
     override fun mangaDetailsParse(response: Response): SManga {
-        val manga = response.extractNextJs<Series>()!!.series
+        val manga = extractNextJsFollowingMove<Series>(response).data.series
 
         return SManga.create().apply {
-            url = "/series/${manga.type}/${manga.id}/${manga.slug}"
+            url = "/ar/series/${manga.type}/${manga.id}/${manga.slug}"
             title = manga.title
             artist = manga.metadata.artist.joinToString()
             author = manga.metadata.author.joinToString()
@@ -239,7 +464,7 @@ class ProChan : HttpSource() {
                     manga.metadata.originalTitle?.also { add(it) }
                 }.also {
                     if (it.isNotEmpty()) {
-                        append("عناوين بديلة\n")
+                        append("Ø¹Ù†Ø§ÙˆÙŠÙ† Ø¨Ø¯ÙŠÙ„Ø©\n")
                         it.forEach { title ->
                             append("- ", title, "\n")
                         }
@@ -254,9 +479,9 @@ class ProChan : HttpSource() {
                     add(origin.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() })
                 }
                 when (manga.type) {
-                    "manga" -> add("مانجا")
-                    "manhwa" -> add("مانها")
-                    "manhua" -> add("مانهوا")
+                    "manga" -> add("Ù…Ø§Ù†Ø¬Ø§")
+                    "manhwa" -> add("Ù…Ø§Ù†Ù‡Ø§")
+                    "manhua" -> add("Ù…Ø§Ù†Ù‡ÙˆØ§")
                 }
                 if (manga.metadata.genres.isNotEmpty()) {
                     val genreMap = genres.associate { it.second to it.first }
@@ -268,9 +493,9 @@ class ProChan : HttpSource() {
                 }
             }.joinToString()
             status = when (manga.progress?.trim()) {
-                "مستمر" -> SManga.ONGOING
-                "مكتمل" -> SManga.COMPLETED
-                "متوقف" -> SManga.ON_HIATUS
+                "Ù…Ø³ØªÙ…Ø±" -> SManga.ONGOING
+                "Ù…ÙƒØªÙ…Ù„" -> SManga.COMPLETED
+                "Ù…ØªÙˆÙ‚Ù" -> SManga.ON_HIATUS
                 else -> SManga.UNKNOWN
             }
             thumbnail_url = (manga.coverImageApp?.desktop ?: manga.metadata.coverImage)?.let {
@@ -289,16 +514,20 @@ class ProChan : HttpSource() {
     override fun chapterListRequest(manga: SManga) = GET(getMangaUrl(manga), rscHeaders)
 
     override fun chapterListParse(response: Response): List<SChapter> {
-        val data = response.extractNextJs<InitialChapters>()!!
+        val result = extractNextJsFollowingMove<InitialChapters>(response)
+        val data = result.data
         val chapters = data.initialChapters.toMutableList()
         val size = chapters.size
         var page = 2
-        val type = response.request.url.pathSegments[1]
-        val id = response.request.url.pathSegments[2]
-        val slug = response.request.url.pathSegments[3]
+        val path = result.effectiveUrl.pathSegments
+        val seriesIndex = path.indexOf("series")
+        val type = path[seriesIndex + 1]
+        val id = path[seriesIndex + 2]
+        val slug = path[seriesIndex + 3]
+        val reqBaseUrl = "https://${result.effectiveUrl.host}"
 
         while (data.totalChapters > chapters.size) {
-            val request = GET("$baseUrl/api/public/$type/$id/chapters?page=${page++}&limit=$size&order=desc", headers)
+            val request = GET("$reqBaseUrl/api/public/$type/$id/chapters?page=${page++}&limit=$size&order=desc", headers)
             val nextChapters = client.newCall(request).execute()
                 .also {
                     if (!it.isSuccessful) {
@@ -317,17 +546,17 @@ class ProChan : HttpSource() {
             .filter { it.language == "AR" }
             .map { chapter ->
                 SChapter.create().apply {
-                    url = "/series/$type/$id/$slug/${chapter.id}/${chapter.number}"
+                    url = "/ar/series/$type/$id/$slug/${chapter.id}/${chapter.number}"
                     name = buildString {
                         append("\u200F") // rtl marker
 
-                        if (chapter.coins != null && chapter.coins > 0) {
+                        if (chapter.isLocked) {
                             append("🔒 ")
                         }
 
                         append("الفصل ")
                         append(
-                            chapter.number.toFloat().toString().substringBefore(".0"),
+                            chapter.number.toFloatOrNull()?.toString()?.substringBefore(".0") ?: chapter.number,
                         )
 
                         chapter.title?.trim()?.takeIf { it.isNotBlank() }?.let { trimmedTitle ->
@@ -338,7 +567,7 @@ class ProChan : HttpSource() {
                         }
                     }
                     scanlator = chapter.uploader ?: "\u200B"
-                    chapter_number = chapter.number.toFloat()
+                    chapter_number = chapter.number.toFloatOrNull() ?: 0f
                     date_upload = dateFormat.tryParse(chapter.createdAt)
                 }
             }
@@ -351,68 +580,280 @@ class ProChan : HttpSource() {
 
     override fun getChapterUrl(chapter: SChapter): String {
         val url = if (chapter.url.startsWith("{")) {
-            chapter.url.parseAs<ChapterUrl>()
+            chapter.url.parseAs<ChapterUrl>().url
         } else {
             chapter.url
         }
 
-        return "$baseUrl$url"
+        return "$baseUrl${url.localizedPath()}"
     }
 
     override fun pageListParse(response: Response): List<Page> {
-        val responseBody = response.body.string()
-        val imageData = responseBody
-            .extractNextJsRsc<Images>()
+        val peekedString = try {
+            response.peekBody(1024 * 1024).string()
+        } catch (_: Exception) {
+            ""
+        }
+
+        val contentType = response.header("Content-Type") ?: ""
+        var imageData = if ("text/x-component" in contentType) {
+            peekedString.extractNextJsRsc<Images>()
+        } else {
+            org.jsoup.Jsoup.parse(peekedString, response.request.url.toString()).extractNextJs<Images>()
+        }
+
+        var reqUrl = response.request.url
+
         if (imageData == null) {
-            val coins = responseBody.extractNextJsRsc<Coins>()?.coins
-            if (coins != null && coins > 0) {
-                throw Exception("فصل مدفوع")
-            } else {
-                return emptyList()
+            val movedTarget = parseMovedBounceTargetUrl(peekedString)
+            if (!movedTarget.isNullOrBlank()) {
+                val parsedUrl = movedTarget.toHttpUrlOrNull()
+                if (parsedUrl != null && parsedUrl.host in ALLOWED_DOMAINS) {
+                    val movedReq = response.request.newBuilder().url(parsedUrl).build()
+                    client.newCall(movedReq).execute().use { movedResp ->
+                        if (movedResp.isSuccessful) {
+                            reqUrl = movedResp.request.url
+                            val movedBody = try {
+                                movedResp.peekBody(1024 * 1024).string()
+                            } catch (_: Exception) {
+                                ""
+                            }
+                            val movedContentType = movedResp.header("Content-Type") ?: ""
+                            imageData = if ("text/x-component" in movedContentType) {
+                                movedBody.extractNextJsRsc<Images>()
+                            } else {
+                                org.jsoup.Jsoup.parse(movedBody, reqUrl.toString()).extractNextJs<Images>()
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        val seriesId = response.request.url.pathSegments[2]
-        val chapterId = response.request.url.pathSegments[4]
+        if (imageData == null) {
+            val coins = peekedString.extractNextJsRsc<Coins>()?.coins
+            val lowerPeeked = peekedString.lowercase()
+            when {
+                coins != null && coins > 0 -> throw Exception("ÙØµÙ„ Ù…Ø¯ÙÙˆØ¹ ÙŠØªØ·Ù„Ø¨ Ù†Ù‚Ø§Ø· (Coins)")
+                "lockedbycoins\":true" in lowerPeeked -> throw Exception("ÙØµÙ„ ÙŠØªØ·Ù„Ø¨ Ù†Ù‚Ø§Ø· (Coins)")
+                "lockedbyshortlink\":true" in lowerPeeked || "shortlink" in lowerPeeked || "hasshortlink\":true" in lowerPeeked -> {
+                    throw Exception("[KOMIKKU_AUTO_WEBVIEW] ÙØµÙ„ ÙŠØªØ·Ù„Ø¨ ØªØ®Ø·ÙŠ Ø±Ø§Ø¨Ø· Ù…Ø®ØªØµØ± (Shortlink). Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ 'ÙØªØ­ ÙÙŠ WebView' Ø£Ø¯Ù†Ø§Ù‡ Ù„ØªØ®Ø·ÙŠÙ‡")
+                }
+                "lockedbyexclusive\":true" in lowerPeeked -> throw Exception("ÙØµÙ„ Ø­ØµØ±ÙŠ (Exclusive)")
+                "lockedforever\":true" in lowerPeeked -> throw Exception("ÙØµÙ„ Ù…ØºÙ„Ù‚ ØªÙ…Ø§Ù…Ø§Ù‹")
+                "blocked\":true" in lowerPeeked || "safebrowsingblocked\":true" in lowerPeeked || "Ø§Ù„ØªØµÙØ­ Ø§Ù„Ø¢Ù…Ù†" in peekedString -> {
+                    throw Exception("ÙŠØ±Ø¬Ù‰ Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ 'ÙØªØ­ ÙÙŠ WebView' ÙˆØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„ ÙÙŠ Ø­Ø³Ø§Ø¨ ProComic Ù„ÙØªØ­ Ù‡Ø°Ø§ Ø§Ù„ÙØµÙ„")
+                }
+                "locked" in lowerPeeked || "lock" in lowerPeeked -> {
+                    throw Exception("ÙØµÙ„ ÙŠØªØ·Ù„Ø¨ ØªØ®Ø·ÙŠ Ø±Ø§Ø¨Ø· Ù…Ø®ØªØµØ± (Shortlink) Ø£Ùˆ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„. Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ 'ÙØªØ­ ÙÙŠ WebView' Ù„ØªØ®Ø·ÙŠÙ‡")
+                }
+                else -> throw Exception("ØªØ¹Ø°Ø± Ø§Ø³ØªØ®Ø±Ø§Ø¬ ØµÙØ­Ø§Øª Ø§Ù„ÙØµÙ„ (Parser Error)")
+            }
+        }
 
-        val images = imageData.images.toMutableList()
+        val path = reqUrl.pathSegments
+        val seriesIndex = path.indexOf("series")
+        val seriesId = path[seriesIndex + 2]
+        val chapterId = path[seriesIndex + 4]
+
+        val images = imageData.appImages
+            .mapNotNull { it.desktop ?: it.mobile }
+            .ifEmpty { imageData.images }
+            .toMutableList()
         val maps = mutableListOf<ScrambledData>()
 
-        if (imageData.deferredMedia != null) {
-            val deferredUrl = baseUrl.toHttpUrl().newBuilder()
+        imageData.deferredMedia?.let { deferredMedia ->
+            if (deferredMedia.requireTurnstile || deferredMedia.turnstileMode in TURNSTILE_MODES) {
+                throw IOException(
+                    "[KOMIKKU_AUTO_WEBVIEW] ProComic requires browser verification for this chapter. " +
+                        "Open it in WebView, complete the challenge, then retry.",
+                )
+            }
+
+            val effectiveOrigin = getEffectiveOriginUrl(reqUrl)
+            val deferredUrl = effectiveOrigin.newBuilder()
                 .addPathSegment("chapter-deferred-media")
                 .addPathSegment(chapterId)
-                .addQueryParameter("token", imageData.deferredMedia.token)
+                .addQueryParameter("token", deferredMedia.token)
+                .addQueryParameter("split", deferredMedia.splitIndex.toString())
                 .build()
 
-            val deferredImages = client.newCall(GET(deferredUrl, headers))
-                .execute().parseAs<Data<DeferredImages>>()
+            val deferredHeaders = headers.newBuilder()
+                .removeAll("Origin")
+                .set("Accept", "application/json")
+                .set("Referer", reqUrl.toString())
+                .build()
+            val deferredImages = client.newCall(GET(deferredUrl, deferredHeaders)).execute().use { deferredResponse ->
+                val body = deferredResponse.body.string()
+                if (!deferredResponse.isSuccessful) {
+                    throw deferredMediaHttpException(deferredResponse.code, body)
+                }
 
-            images.addAll(deferredImages.data.images)
-            maps.addAll(deferredImages.data.maps)
+                val parsed = try {
+                    body.parseAs<DeferredImagesResponse>()
+                } catch (error: Exception) {
+                    throw IOException("ProComic deferred media returned an invalid HTTP 200 response", error)
+                }
+                val payload = parsed.data ?: DeferredImages(parsed.images, parsed.maps)
+                if (payload.images.isEmpty() && payload.maps.isEmpty()) {
+                    throw IOException("ProComic deferred media returned no images or maps")
+                }
+                payload
+            }
+
+            images.addAll(deferredImages.images)
+            maps.addAll(deferredImages.maps)
         }
 
         countViews(seriesId, chapterId)
 
-        val chapterUrl = response.request.url.toString()
+        val chapterUrl = reqUrl.toString()
         val pages = mutableListOf<Page>()
 
         images.mapIndexedTo(pages) { index, imageUrl ->
             Page(index, chapterUrl, imageUrl)
         }
+        val firstScrambledPageIndex = pages.size
         maps.mapIndexedTo(pages) { index, scrambledData ->
-            Page(pages.size + index, chapterUrl, "http://$SCRAMBLED_IMAGE_HOST/#${scrambledData.toJsonString()}")
+            val pageIndex = firstScrambledPageIndex + index
+            Page(
+                pageIndex,
+                chapterUrl,
+                "http://$SCRAMBLED_IMAGE_HOST/?pageIndex=$pageIndex#${scrambledData.toJsonString()}",
+            )
         }
 
         return pages
     }
 
+    private fun deferredMediaHttpException(status: Int, body: String): IOException {
+        val error = try {
+            body.parseAs<DeferredApiError>()
+        } catch (_: Exception) {
+            null
+        }
+        val nested = error?.data
+        val errorCode = (error?.errorCode ?: nested?.errorCode).sanitizeApiText()
+        val message = (error?.message ?: nested?.message ?: error?.error ?: nested?.error).sanitizeApiText()
+        val minimumVersion = error?.minimumVersionCode ?: error?.minVersionCode ?: nested?.minimumVersionCode ?: nested?.minVersionCode
+        val turnstileRequired = error?.requireTurnstile == true ||
+            nested?.requireTurnstile == true ||
+            error?.turnstileMode in TURNSTILE_MODES ||
+            nested?.turnstileMode in TURNSTILE_MODES ||
+            errorCode?.contains("turnstile", ignoreCase = true) == true ||
+            message?.contains("turnstile", ignoreCase = true) == true
+
+        if (turnstileRequired) {
+            return IOException(
+                "[KOMIKKU_AUTO_WEBVIEW] ProComic requires browser verification for this chapter. " +
+                    "Open it in WebView, complete the challenge, then retry.",
+            )
+        }
+
+        val details = listOfNotNull(
+            errorCode?.let { "code=$it" },
+            message,
+            minimumVersion?.let { "minimumVersion=$it" },
+        ).joinToString(", ")
+        val suffix = details.takeIf(String::isNotBlank)?.let { ": $it" }.orEmpty()
+
+        return when (status) {
+            401, 403 -> IOException(
+                "ProComic deferred media HTTP $status$suffix. " +
+                    "Open the chapter in WebView and confirm that you are signed in, then retry.",
+            )
+            426 -> IOException("ProComic deferred media HTTP 426$suffix")
+            else -> IOException("ProComic deferred media HTTP $status$suffix")
+        }
+    }
+
+    private fun String?.sanitizeApiText(): String? = this
+        ?.replace(Regex("\\s+"), " ")
+        ?.trim()
+        ?.takeIf(String::isNotEmpty)
+        ?.take(MAX_API_ERROR_LENGTH)
+
+    private fun isProtectedCdnHost(host: String): Boolean = host.startsWith("cdn") && (
+        host.endsWith(".prochan.pro") ||
+            host.endsWith(".procomic.pro") ||
+            host.endsWith(".procomic.net")
+        )
+
+    private fun signCdnImageUrlIfNeeded(imgUrl: HttpUrl, chapterUrl: String): HttpUrl {
+        val host = imgUrl.host
+        val isProtected = isProtectedCdnHost(host)
+        if (!isProtected) {
+            return imgUrl
+        }
+        if (imgUrl.queryParameter("token") != null && imgUrl.queryParameter("expires") != null) {
+            return imgUrl
+        }
+
+        val effectiveOrigin = getEffectiveOriginUrl(chapterUrl)
+        val effectiveChapterUrl = chapterUrl.toHttpUrlOrNull()?.newBuilder()
+            ?.host(effectiveOrigin.host)
+            ?.build()?.toString() ?: chapterUrl
+
+        val payload = Url(url = imgUrl.toString()).toJsonString().toRequestBody(JSON_MEDIA_TYPE)
+        val signHeaders = headersBuilder()
+            .set("Origin", effectiveOrigin.toString().removeSuffix("/"))
+            .set("Sec-Fetch-Site", "same-origin")
+            .set("Referer", effectiveChapterUrl)
+            .build()
+        val signUrl = effectiveOrigin.newBuilder()
+            .addPathSegment("api")
+            .addPathSegment("cdn-image")
+            .addPathSegment("sign")
+            .build()
+
+        val signRequest = POST(signUrl.toString(), signHeaders, payload)
+        val response = client.newCall(signRequest).execute()
+
+        val code = response.code
+        if (!response.isSuccessful) {
+            response.closeQuietly()
+            throw IOException("HTTP $code signing CDN image")
+        }
+
+        val token = response.parseAs<Token>()
+        response.closeQuietly()
+
+        return imgUrl.newBuilder()
+            .setQueryParameter("token", token.token)
+            .setQueryParameter("expires", token.expires.toString())
+            .build()
+    }
+
+    private fun proxyCdnImageUrlIfNeeded(imgUrl: HttpUrl, chapterUrl: String): HttpUrl {
+        if (!isProtectedCdnHost(imgUrl.host)) {
+            return imgUrl
+        }
+
+        val signedUrl = signCdnImageUrlIfNeeded(imgUrl, chapterUrl)
+        val token = signedUrl.queryParameter("token")
+            ?: throw IOException("ProComic CDN signature did not include a token")
+        val expires = signedUrl.queryParameter("expires")
+            ?: throw IOException("ProComic CDN signature did not include an expiry")
+        val effectiveOrigin = getEffectiveOriginUrl(chapterUrl)
+
+        return effectiveOrigin.newBuilder()
+            .addPathSegment("api")
+            .addPathSegment("cdn-image")
+            .addQueryParameter("url", imgUrl.toString())
+            .addQueryParameter("token", token)
+            .addQueryParameter("expires", expires)
+            .build()
+    }
+
     override fun imageRequest(page: Page): Request {
+        val rawUrl = page.imageUrl!!.toHttpUrl()
+        val signedUrl = proxyCdnImageUrlIfNeeded(rawUrl, page.url)
+
         val headers = headersBuilder()
             .set("Referer", page.url)
             .build()
 
-        return GET(page.imageUrl!!, headers)
+        return GET(signedUrl, headers)
     }
 
     private fun scrambledImageInterceptor(chain: Interceptor.Chain): Response {
@@ -422,16 +863,24 @@ class ProChan : HttpSource() {
             return chain.proceed(request)
         }
 
-        val chapterUrl = request.header("Referer")!!
-        val cdn = when (chapterUrl.toHttpUrl().pathSegments[1]) {
+        val chapterUrl = request.header("Referer") ?: return chain.proceed(request)
+        val chapterPath = chapterUrl.toHttpUrl().pathSegments
+        val seriesIndex = chapterPath.indexOf("series")
+        val cdn = when (if (seriesIndex >= 0 && chapterPath.size > seriesIndex + 1) chapterPath[seriesIndex + 1] else "") {
             "manga" -> "cdn1"
             "manhua" -> "cdn2"
             else -> "cdn3"
         }
 
-        val scrambledImage = when (val scrambledData = url.fragment!!.parseAs<ScrambledData>()) {
+        val scrambledData = url.fragment?.parseAs<ScrambledData>() ?: return chain.proceed(request)
+        val scrambledImage = when (scrambledData) {
             is ScrambledImage -> scrambledData
-            is ScrambledImageToken -> decodeScrambledImageToken(scrambledData)
+            is ScrambledImageToken -> decodeScrambledImageToken(
+                scrambledData,
+                chapterUrl,
+                url.queryParameter("pageIndex")?.toIntOrNull() ?: 0,
+                cdn,
+            )
         }
 
         val (puzzleMode, layout) = scrambledImage.mode.split("_", limit = 2)
@@ -450,24 +899,7 @@ class ProChan : HttpSource() {
                     } else {
                         pieceUrl
                     }.toHttpUrl()
-                    if (imgUrl.host.startsWith("cdn")) {
-                        val payload = Url(url = imgUrl.toString()).toJsonString().toRequestBody(JSON_MEDIA_TYPE)
-                        val signHeaders = headersBuilder()
-                            .set("Sec-Fetch-Site", "same-origin")
-                            .set("Referer", chapterUrl)
-                            .build()
-                        val signRequest = POST("$baseUrl/api/cdn-image/sign", signHeaders, payload)
-                        val response = client.newCall(signRequest).await()
-                        if (response.isSuccessful) {
-                            val token = response.parseAs<Token>()
-                            imgUrl = imgUrl.newBuilder()
-                                .setQueryParameter("token", token.token)
-                                .setQueryParameter("expires", token.expires.toString())
-                                .build()
-                        } else {
-                            response.close()
-                        }
-                    }
+                    imgUrl = signCdnImageUrlIfNeeded(imgUrl, chapterUrl)
                     val pieceRequest = request.newBuilder().url(imgUrl).build()
                     val response = client.newCall(pieceRequest).await()
                     response.body.use { body ->
@@ -536,9 +968,40 @@ class ProChan : HttpSource() {
     private val sessionKey = ConcurrentHashMap<Int, Pair<String, Long>>()
     private val sessionKeyLock = Any()
 
-    private fun decodeScrambledImageToken(data: ScrambledImageToken): ScrambledImage {
+    private fun decodeScrambledImageToken(
+        data: ScrambledImageToken,
+        chapterUrl: String,
+        pageIndex: Int,
+        cdn: String,
+    ): ScrambledImage {
         val value = String(urlSafeBase64(data.token), Charsets.UTF_8)
             .parseAs<ScrambledImageTokenValue>()
+
+        if (value.m == "browser_session" && value.v == 3) {
+            val payload = ProxyPlanRequest(
+                token = data.token,
+                method = data.method,
+                cdnPath = cdn,
+                pageIndex = pageIndex,
+            ).toJsonString().toRequestBody(JSON_MEDIA_TYPE)
+            val effectiveOrigin = getEffectiveOriginUrl(chapterUrl)
+            val proxyPlanUrl = effectiveOrigin.newBuilder()
+                .addPathSegment("chapter-map-proxy-plan")
+                .addPathSegment(value.cid.toString())
+                .build()
+            val request = POST(
+                proxyPlanUrl.toString(),
+                headersBuilder().set("Referer", chapterUrl).build(),
+                payload,
+            )
+
+            return client.newCall(request).execute().use { response ->
+                if (!response.isSuccessful) {
+                    throw IOException("Failed to prepare protected page, HTTP ${response.code}")
+                }
+                response.parseAs<Data<ProxyPlan>>().data.map
+            }
+        }
 
         val iv = urlSafeBase64(value.iv)
         val tag = urlSafeBase64(value.tag)
@@ -557,7 +1020,12 @@ class ProChan : HttpSource() {
             "browser_session" if value.v == 3 -> synchronized(sessionKeyLock) {
                 val time = System.currentTimeMillis()
                 val key = sessionKey[value.cid]?.takeIf { it.second > time }?.first ?: run {
-                    val request = GET("$baseUrl/chapter-map-session-key/${value.cid}", headers)
+                    val effectiveOrigin = getEffectiveOriginUrl(chapterUrl)
+                    val sessionKeyUrl = effectiveOrigin.newBuilder()
+                        .addPathSegment("chapter-map-session-key")
+                        .addPathSegment(value.cid.toString())
+                        .build()
+                    val request = GET(sessionKeyUrl.toString(), headers)
                     val response = client.newCall(request).execute().parseAs<Data<Key>>()
 
                     sessionKey[value.cid] = response.data.key to (time + 120000)
@@ -584,11 +1052,21 @@ class ProChan : HttpSource() {
         .withPadding(Base64.PaddingOption.PRESENT_OPTIONAL)
         .decode(data)
 
+    private fun getEffectiveOriginUrl(url: Any): HttpUrl {
+        val httpUrl = when (url) {
+            is HttpUrl -> url
+            is String -> url.toHttpUrlOrNull()
+            else -> null
+        } ?: baseUrl.toHttpUrl()
+        return "https://${httpUrl.host}".toHttpUrl()
+    }
+
     private fun countViews(seriesId: String, chapterId: String? = null) {
-        val userAgent = headers["User-Agent"]!!
+        val seriesIdInt = seriesId.toIntOrNull() ?: return
+        val userAgent = headers["User-Agent"] ?: "Mozilla/5.0"
         val payload = ViewsDto(
-            chapterId = chapterId?.toInt(),
-            contentId = seriesId.toInt(),
+            chapterId = chapterId?.toIntOrNull(),
+            contentId = seriesIdInt,
             deviceType = when {
                 MOBILE_REGEX.containsMatchIn(userAgent) -> "mobile"
                 TABLES_REGEX.containsMatchIn(userAgent) -> "tablet"
@@ -616,16 +1094,58 @@ class ProChan : HttpSource() {
             )
     }
 
-    override fun popularMangaRequest(page: Int): Request = throw UnsupportedOperationException()
-    override fun popularMangaParse(response: Response): MangasPage = throw UnsupportedOperationException()
-    override fun latestUpdatesRequest(page: Int): Request = throw UnsupportedOperationException()
-    override fun latestUpdatesParse(response: Response): MangasPage = throw UnsupportedOperationException()
-    override fun searchMangaParse(response: Response): MangasPage = throw UnsupportedOperationException()
+    private fun BrowseManga.toSManga() = SManga.create().apply {
+        url = "/ar/series/${this@toSManga.type}/${this@toSManga.id}/${this@toSManga.slug}"
+        title = this@toSManga.title
+        thumbnail_url = (
+            this@toSManga.coverImageApp?.desktop
+                ?: this@toSManga.coverImage
+                ?: this@toSManga.thumbnail
+            ).toImageUrl(this@toSManga.cdn)
+    }
+
+    private fun String?.toImageUrl(cdn: String?): String? = this?.let { imageUrl ->
+        if (imageUrl.startsWith("/")) {
+            cdn?.let { "https://$it.$domain$imageUrl" }
+        } else {
+            imageUrl
+        }
+    }
+
+    private fun String.localizedPath(): String = when {
+        startsWith("/ar/series/") -> this
+        startsWith("/series/") -> "/ar$this"
+        else -> this
+    }
+
     override fun imageUrlParse(response: Response): String = throw UnsupportedOperationException()
 }
 
 private val SUPPORTED_TYPES = setOf("manga", "manhwa", "manhua")
+private val ALLOWED_DOMAINS = setOf("procomic.net", "procomic.pro", "www.procomic.net", "www.procomic.pro", "prochan.pro", "www.prochan.pro")
 private const val SCRAMBLED_IMAGE_HOST = "127.0.0.1"
+private const val MAX_API_ERROR_LENGTH = 240
 private val JSON_MEDIA_TYPE = "application/json".toMediaType()
+private val TURNSTILE_MODES = setOf("hidden", "visible")
 private val MOBILE_REGEX = Regex("mobile|android|iphone|ipad|ipod", RegexOption.IGNORE_CASE)
 private val TABLES_REGEX = Regex("tablet", RegexOption.IGNORE_CASE)
+private val MOVED_RSC_TARGET_URL_REGEX = Regex(""""targetUrl"\s*:\s*"(https?:\/\/[^"]+)"""")
+private val MOVED_HOST_REGEX = Regex("""var\s+h\s*=\s*\[(.*?)\]\.join\(['"]['"]\)""")
+private val MOVED_PATH_REGEX = Regex("""var\s+u\s*=\s*['"]https:\/\/['"]\s*\+\s*h\s*\+\s*['"]([^'"]+)['"]""")
+
+private fun parseMovedBounceTargetUrl(bodyString: String): String? {
+    MOVED_RSC_TARGET_URL_REGEX.find(bodyString)?.groupValues?.get(1)?.let { return it }
+
+    val hostMatch = MOVED_HOST_REGEX.find(bodyString) ?: return null
+    val pathMatch = MOVED_PATH_REGEX.find(bodyString) ?: return null
+
+    val rawHostItems = hostMatch.groupValues[1]
+    val host = rawHostItems.split(",")
+        .map { it.trim().removeSurrounding("'").removeSurrounding("\"") }
+        .joinToString("")
+
+    val path = pathMatch.groupValues[1]
+    if (host.isBlank() || path.isBlank()) return null
+
+    return "https://$host$path"
+}

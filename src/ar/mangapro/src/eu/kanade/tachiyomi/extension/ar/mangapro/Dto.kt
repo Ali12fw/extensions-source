@@ -45,6 +45,7 @@ class BrowseManga(
     val progress: String? = null,
     val metadata: MetaData,
     val coverImage: String? = null,
+    val thumbnail: String? = null,
     val coverImageApp: CoverImage? = null,
     @SerialName("cdn_path")
     val cdn: String? = null,
@@ -57,7 +58,35 @@ class BrowseManga(
 }
 
 @Serializable
+class PopularResponse(
+    val data: List<PopularEntry>,
+)
+
+@Serializable
+class PopularEntry(
+    val content: BrowseManga,
+)
+
+@Serializable
+class LatestUpdates(
+    val data: List<LatestUpdate>,
+)
+
+@Serializable
+class LatestUpdate(
+    val mangaId: Int,
+    val mangaSlug: String,
+    val mangaTitle: String,
+    val coverImage: String? = null,
+    @SerialName("cdn_path")
+    val cdn: String? = null,
+    val type: String,
+    val language: String? = null,
+)
+
+@Serializable
 class CoverImage(
+    val mobile: String? = null,
     val desktop: String? = null,
 )
 
@@ -124,11 +153,22 @@ class Chapter(
     val title: String? = null,
     @SerialName("coins_required")
     val coins: Int? = null,
+    val lockedForever: Boolean? = false,
+    val lockedByCoins: Boolean? = false,
+    val lockedByShortlink: Boolean? = false,
+    val lockedByExclusive: Boolean? = false,
     @SerialName("uploader_nickname")
     val uploader: String? = null,
     @SerialName("created_at")
     val createdAt: String? = null,
-)
+) {
+    val isLocked: Boolean
+        get() = lockedForever == true ||
+            lockedByCoins == true ||
+            lockedByShortlink == true ||
+            lockedByExclusive == true ||
+            (coins != null && coins > 0)
+}
 
 @Serializable
 class ChapterUrl(
@@ -138,6 +178,7 @@ class ChapterUrl(
 @Serializable
 class Images(
     val images: List<String>,
+    val appImages: List<CoverImage> = emptyList(),
     @Serializable(DeferredMediaSerializer::class)
     val deferredMedia: DeferredMediaToken? = null,
 )
@@ -145,6 +186,9 @@ class Images(
 @Serializable
 class DeferredMediaToken(
     val token: String,
+    val splitIndex: Int,
+    val requireTurnstile: Boolean = false,
+    val turnstileMode: String? = null,
 )
 
 object DeferredMediaSerializer : KSerializer<DeferredMediaToken?> {
@@ -170,9 +214,40 @@ object DeferredMediaSerializer : KSerializer<DeferredMediaToken?> {
 
 @Serializable
 class DeferredImages(
-    val images: List<String>,
+    val images: List<String> = emptyList(),
     @Serializable(ScrambledDataSerializer::class)
-    val maps: List<ScrambledData>,
+    val maps: List<ScrambledData> = emptyList(),
+)
+
+@Serializable
+class DeferredImagesResponse(
+    val data: DeferredImages? = null,
+    val images: List<String> = emptyList(),
+    @Serializable(ScrambledDataSerializer::class)
+    val maps: List<ScrambledData> = emptyList(),
+)
+
+@Serializable
+class DeferredApiError(
+    val error: String? = null,
+    val errorCode: String? = null,
+    val message: String? = null,
+    val minimumVersionCode: Int? = null,
+    val minVersionCode: Int? = null,
+    val turnstileMode: String? = null,
+    val requireTurnstile: Boolean = false,
+    val data: DeferredApiErrorData? = null,
+)
+
+@Serializable
+class DeferredApiErrorData(
+    val error: String? = null,
+    val errorCode: String? = null,
+    val message: String? = null,
+    val minimumVersionCode: Int? = null,
+    val minVersionCode: Int? = null,
+    val turnstileMode: String? = null,
+    val requireTurnstile: Boolean = false,
 )
 
 @Serializable
@@ -219,6 +294,19 @@ class ScrambledImageTokenValue(
     val m: String,
     val tag: String,
     val v: Int,
+)
+
+@Serializable
+class ProxyPlanRequest(
+    val token: String,
+    val method: String,
+    val cdnPath: String,
+    val pageIndex: Int,
+)
+
+@Serializable
+class ProxyPlan(
+    val map: ScrambledImage,
 )
 
 @Serializable
