@@ -1,0 +1,9 @@
+ext {
+    extName = 'Goon Scans'
+    extClass = '.GoonScans'
+    baseUrl = 'https://goonscans.org'
+    extVersionCode = 33
+    isNsfw = true
+}
+
+apply from: "$rootDir/common.gradle"
