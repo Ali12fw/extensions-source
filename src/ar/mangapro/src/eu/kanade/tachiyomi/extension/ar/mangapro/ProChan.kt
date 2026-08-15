@@ -651,10 +651,34 @@ class ProChan : HttpSource() {
             }
         }
 
-        val path = reqUrl.pathSegments
-        val seriesIndex = path.indexOf("series")
-        val seriesId = path[seriesIndex + 2]
-        val chapterId = path[seriesIndex + 4]
+        val seriesRouteUrl = generateSequence(response) { it.priorResponse }
+            .map { it.request.url }
+            .firstOrNull { url ->
+                val seriesIndex = url.pathSegments.indexOf("series")
+                seriesIndex >= 0 && url.pathSegments.size > seriesIndex + 4
+            }
+
+        val (seriesId, chapterId) = if (seriesRouteUrl != null) {
+            val path = seriesRouteUrl.pathSegments
+            val seriesIndex = path.indexOf("series")
+            val sId = path.getOrNull(seriesIndex + 2).orEmpty()
+            val cId = path.getOrNull(seriesIndex + 4).orEmpty()
+            sId to cId
+        } else {
+            val path = reqUrl.pathSegments
+            val chapterIndex = path.indexOf("chapter")
+            val segment = if (chapterIndex >= 0 && path.size > chapterIndex + 1) {
+                path[chapterIndex + 1]
+            } else {
+                path.lastOrNull().orEmpty()
+            }
+            val cId = segment.substringAfterLast("-").takeIf { it.isNotEmpty() && it.all(Char::isDigit) }.orEmpty()
+            "" to cId
+        }
+
+        if (chapterId.isBlank() && imageData.deferredMedia != null) {
+            throw IOException("ProComic chapter identifier not found for deferred media")
+        }
 
         val images = imageData.appImages
             .mapNotNull { it.desktop ?: it.mobile }
@@ -707,7 +731,7 @@ class ProChan : HttpSource() {
 
         countViews(seriesId, chapterId)
 
-        val chapterUrl = reqUrl.toString()
+        val chapterUrl = (seriesRouteUrl ?: reqUrl).toString()
         val pages = mutableListOf<Page>()
 
         images.mapIndexedTo(pages) { index, imageUrl ->
@@ -866,9 +890,14 @@ class ProChan : HttpSource() {
         val chapterUrl = request.header("Referer") ?: return chain.proceed(request)
         val chapterPath = chapterUrl.toHttpUrl().pathSegments
         val seriesIndex = chapterPath.indexOf("series")
-        val cdn = when (if (seriesIndex >= 0 && chapterPath.size > seriesIndex + 1) chapterPath[seriesIndex + 1] else "") {
-            "manga" -> "cdn1"
-            "manhua" -> "cdn2"
+        val cdn = when {
+            seriesIndex >= 0 && chapterPath.size > seriesIndex + 1 -> when (chapterPath[seriesIndex + 1]) {
+                "manga" -> "cdn1"
+                "manhua" -> "cdn2"
+                else -> "cdn3"
+            }
+            "manga" in chapterUrl -> "cdn1"
+            "manhua" in chapterUrl -> "cdn2"
             else -> "cdn3"
         }
 
@@ -902,6 +931,11 @@ class ProChan : HttpSource() {
                     imgUrl = signCdnImageUrlIfNeeded(imgUrl, chapterUrl)
                     val pieceRequest = request.newBuilder().url(imgUrl).build()
                     val response = client.newCall(pieceRequest).await()
+                    if (!response.isSuccessful) {
+                        val code = response.code
+                        response.close()
+                        throw IOException("HTTP $code downloading scrambled piece $imgUrl")
+                    }
                     response.body.use { body ->
                         // use Tachiyomi ImageDecoder because android.graphics.BitmapFactory doesn't handle avif
                         val decoder = ImageDecoder.newInstance(body.byteStream())
