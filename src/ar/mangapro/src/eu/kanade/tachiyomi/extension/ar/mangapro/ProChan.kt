@@ -519,28 +519,36 @@ class ProChan : HttpSource() {
         val chapters = data.initialChapters.toMutableList()
         val size = chapters.size
         var page = 2
-        val path = result.effectiveUrl.pathSegments
+        val sourceRouteUrl = generateSequence(response) { it.priorResponse }
+            .map { it.request.url }
+            .firstOrNull { url ->
+                val sIdx = url.pathSegments.indexOf("series")
+                sIdx >= 0 && url.pathSegments.size > sIdx + 3
+            } ?: result.effectiveUrl
+        val path = sourceRouteUrl.pathSegments
         val seriesIndex = path.indexOf("series")
-        val type = path[seriesIndex + 1]
-        val id = path[seriesIndex + 2]
-        val slug = path[seriesIndex + 3]
+        val type = if (seriesIndex >= 0 && path.size > seriesIndex + 1) path[seriesIndex + 1] else "manga"
+        val id = if (seriesIndex >= 0 && path.size > seriesIndex + 2) path[seriesIndex + 2] else ""
+        val slug = if (seriesIndex >= 0 && path.size > seriesIndex + 3) path[seriesIndex + 3] else ""
         val reqBaseUrl = "https://${result.effectiveUrl.host}"
 
-        while (data.totalChapters > chapters.size) {
-            val request = GET("$reqBaseUrl/api/public/$type/$id/chapters?page=${page++}&limit=$size&order=desc", headers)
-            val nextChapters = client.newCall(request).execute()
-                .also {
-                    if (!it.isSuccessful) {
-                        it.close()
-                        throw Exception("HTTP ${it.code}")
+        if (id.isNotBlank()) {
+            while (data.totalChapters > chapters.size) {
+                val request = GET("$reqBaseUrl/api/public/$type/$id/chapters?page=${page++}&limit=$size&order=desc", headers)
+                val nextChapters = client.newCall(request).execute()
+                    .also {
+                        if (!it.isSuccessful) {
+                            it.close()
+                            throw Exception("HTTP ${it.code}")
+                        }
                     }
-                }
-                .parseAs<Data<List<Chapter>>>()
+                    .parseAs<Data<List<Chapter>>>()
 
-            chapters.addAll(nextChapters.data)
+                chapters.addAll(nextChapters.data)
+            }
+
+            countViews(id)
         }
-
-        countViews(id)
 
         return chapters
             .filter { it.language == "AR" }
