@@ -22,9 +22,15 @@ class YonaBar :
     override fun latestUpdatesParse(response: Response): MangasPage = super.latestUpdatesParse(response).copy(hasNextPage = false)
 
     override fun pageListParse(document: Document): List<Page> = super.pageListParse(document)
-        .map { page ->
-            page.apply {
-                imageUrl = imageUrl!!.replaceFirst("medium1", "medium1x")
-            }
+        .filterNot { it.imageUrl?.contains("b.jpg") == true }
+        .mapIndexed { index, page ->
+            Page(
+                index = index,
+                url = page.url,
+                imageUrl = page.imageUrl
+                    ?.replace("medium1.aramang.nom.za", "medium1xf.aramang.nom.za")
+                    ?.replace("medium2.aramang.nom.za", "medium2x.aramang.nom.za")
+                    ?.trim(),
+            )
         }
 }
