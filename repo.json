@@ -9,10 +9,10 @@
     {
       "name": "Thunder Scans",
       "pkg": "eu.kanade.tachiyomi.extension.all.thunderscans",
-      "apk": "tachiyomi-all.thunderscans-v1.4.46-release.apk",
+      "apk": "tachiyomi-all.thunderscans-v1.4.47-release.apk",
       "lang": "all",
-      "code": 16,
-      "version": "1.4.46",
+      "code": 47,
+      "version": "1.4.47",
       "nsfw": 0,
       "sources": [
         {
@@ -22,8 +22,8 @@
           "baseUrl": "https://ali12fw.github.io/extensions-source"
         }
       ],
-      "size": 73735,
-      "sha256": "9e0594a98fa16781b98bc282919ddf1924434036bc1aa07a87c139dbad2379f3"
+      "size": 73728,
+      "sha256": "0d3c3d0c22ad5333b0c9236f6c7f24e9103865e796120f471afea878143666f6"
     },
     {
       "name": "Team X",
@@ -31,7 +31,7 @@
       "apk": "tachiyomi-ar.teamx-v1.4.35-release.apk",
       "lang": "ar",
       "code": 35,
-      "version": "1.4.34",
+      "version": "1.4.35",
       "nsfw": 0,
       "sources": [
         {
@@ -50,7 +50,7 @@
       "apk": "tachiyomi-ar.waveteamy-v1.4.5-release.apk",
       "lang": "ar",
       "code": 5,
-      "version": "1.4.4",
+      "version": "1.4.5",
       "nsfw": 0,
       "sources": [
         {
@@ -68,8 +68,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
       "apk": "tachiyomi-ar.areascans-v1.4.37-release.apk",
       "lang": "ar",
-      "code": 7,
-      "version": "1.4.36",
+      "code": 37,
+      "version": "1.4.37",
       "nsfw": 0,
       "sources": [
         {
@@ -87,8 +87,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.yonabar",
       "apk": "tachiyomi-ar.yonabar-v1.4.56-release.apk",
       "lang": "ar",
-      "code": 11,
-      "version": "1.4.55",
+      "code": 56,
+      "version": "1.4.56",
       "nsfw": 1,
       "sources": [
         {
@@ -107,7 +107,7 @@
       "apk": "tachiyomi-ar.goonscans-v1.4.35-release.apk",
       "lang": "ar",
       "code": 35,
-      "version": "1.4.34",
+      "version": "1.4.35",
       "nsfw": 1,
       "sources": [
         {
@@ -126,7 +126,7 @@
       "apk": "tachiyomi-ar.mangaswat-v1.4.63-release.apk",
       "lang": "ar",
       "code": 63,
-      "version": "1.4.62",
+      "version": "1.4.63",
       "nsfw": 0,
       "sources": [
         {
@@ -145,7 +145,7 @@
       "apk": "tachiyomi-ar.mangatime-v1.4.3-release.apk",
       "lang": "ar",
       "code": 3,
-      "version": "1.4.2",
+      "version": "1.4.3",
       "nsfw": 0,
       "sources": [
         {
@@ -163,8 +163,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.all.hentaihand",
       "apk": "tachiyomi-all.hentaihand-v1.4.13-release.apk",
       "lang": "all",
-      "code": 9,
-      "version": "1.4.12",
+      "code": 13,
+      "version": "1.4.13",
       "nsfw": 1,
       "sources": [
         {
@@ -182,8 +182,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.arabtoons",
       "apk": "tachiyomi-ar.arabtoons-v1.4.55-release.apk",
       "lang": "ar",
-      "code": 10,
-      "version": "1.4.54",
+      "code": 55,
+      "version": "1.4.55",
       "nsfw": 1,
       "sources": [
         {
@@ -199,10 +199,10 @@
     {
       "name": "Azora",
       "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
-      "apk": "tachiyomi-ar.azora-v1.4.73-release.apk",
+      "apk": "tachiyomi-ar.azora-v1.4.74-release.apk",
       "lang": "ar",
-      "code": 57,
-      "version": "1.4.73",
+      "code": 74,
+      "version": "1.4.74",
       "nsfw": 0,
       "sources": [
         {
@@ -212,16 +212,16 @@
           "baseUrl": "https://ali12fw.github.io/extensions-source"
         }
       ],
-      "size": 85447,
-      "sha256": "5fb4a107926e7866634e1e7a11dcb03dc31874e7c108e5e27f382e0044c857e2"
+      "size": 85446,
+      "sha256": "97b8866125db51cbf947af4058634050bd6363061c949ab55c84f6a92c5ffcf9"
     },
     {
       "name": "Dilar",
       "pkg": "eu.kanade.tachiyomi.extension.ar.dilar",
       "apk": "tachiyomi-ar.dilar-v1.4.13-release.apk",
       "lang": "ar",
-      "code": 10,
-      "version": "1.4.12",
+      "code": 13,
+      "version": "1.4.13",
       "nsfw": 0,
       "sources": [
         {
@@ -239,8 +239,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.crowscans",
       "apk": "tachiyomi-ar.crowscans-v1.4.49-release.apk",
       "lang": "ar",
-      "code": 4,
-      "version": "1.4.48",
+      "code": 49,
+      "version": "1.4.49",
       "nsfw": 0,
       "sources": [
         {
@@ -258,8 +258,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.arbxcomix",
       "apk": "tachiyomi-ar.arbxcomix-v1.4.54-release.apk",
       "lang": "ar",
-      "code": 9,
-      "version": "1.4.53",
+      "code": 54,
+      "version": "1.4.54",
       "nsfw": 1,
       "sources": [
         {
@@ -275,10 +275,10 @@
     {
       "name": "Arabs Hentai",
       "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
-      "apk": "tachiyomi-ar.arabshentai-v1.4.5-release.apk",
+      "apk": "tachiyomi-ar.arabshentai-v1.4.6-release.apk",
       "lang": "ar",
-      "code": 5,
-      "version": "1.4.5",
+      "code": 6,
+      "version": "1.4.6",
       "nsfw": 1,
       "sources": [
         {
@@ -289,15 +289,15 @@
         }
       ],
       "size": 67792,
-      "sha256": "0848b9e82ea8250201dec3092c73fed24d10674578c1b86a9302ae477a3f6067"
+      "sha256": "810afe596049925efcbfab9b823f2ade93ccbf756f71f4a535a53515f8f122da"
     },
     {
       "name": "Manga Starz",
       "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
       "apk": "tachiyomi-ar.mangastarz-v1.4.63-release.apk",
       "lang": "ar",
-      "code": 18,
-      "version": "1.4.62",
+      "code": 63,
+      "version": "1.4.63",
       "nsfw": 0,
       "sources": [
         {
@@ -315,8 +315,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.mangalek",
       "apk": "tachiyomi-ar.mangalek-v1.4.67-release.apk",
       "lang": "ar",
-      "code": 22,
-      "version": "1.4.66",
+      "code": 67,
+      "version": "1.4.67",
       "nsfw": 0,
       "sources": [
         {
@@ -335,7 +335,7 @@
       "apk": "tachiyomi-ar.mangapro-v1.4.65-release.apk",
       "lang": "ar",
       "code": 65,
-      "version": "1.4.64",
+      "version": "1.4.65",
       "nsfw": 1,
       "sources": [
         {
@@ -354,7 +354,7 @@
       "apk": "tachiyomi-all.hentai3-v1.4.7-release.apk",
       "lang": "all",
       "code": 7,
-      "version": "1.4.6",
+      "version": "1.4.7",
       "nsfw": 1,
       "sources": [
         {
@@ -370,10 +370,10 @@
     {
       "name": "Akuma",
       "pkg": "eu.kanade.tachiyomi.extension.all.akuma",
-      "apk": "tachiyomi-all.akuma-v1.4.11-release.apk",
+      "apk": "tachiyomi-all.akuma-v1.4.12-release.apk",
       "lang": "all",
-      "code": 11,
-      "version": "1.4.11",
+      "code": 12,
+      "version": "1.4.12",
       "nsfw": 1,
       "sources": [
         {
@@ -383,16 +383,16 @@
           "baseUrl": "https://ali12fw.github.io/extensions-source"
         }
       ],
-      "size": 49924,
-      "sha256": "841526aa6324c9aa067a2cf760cd6a95ffeac04f3a97e94d9f2281a38cbf0a12"
+      "size": 49927,
+      "sha256": "2ff2b8904a575ff69c52eace99b5718b539c7e8f2938b1f66d2de128c12db9bf"
     },
     {
       "name": "Hentai Slayer",
       "pkg": "eu.kanade.tachiyomi.extension.ar.hentaislayer",
       "apk": "tachiyomi-ar.hentaislayer-v1.4.8-release.apk",
       "lang": "ar",
-      "code": 7,
-      "version": "1.4.7",
+      "code": 8,
+      "version": "1.4.8",
       "nsfw": 1,
       "sources": [
         {
@@ -410,8 +410,8 @@
       "pkg": "eu.kanade.tachiyomi.extension.ar.hijala",
       "apk": "tachiyomi-ar.hijala-v1.4.37-release.apk",
       "lang": "ar",
-      "code": 7,
-      "version": "1.4.36",
+      "code": 37,
+      "version": "1.4.37",
       "nsfw": 0,
       "sources": [
         {
