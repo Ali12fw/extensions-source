@@ -32,6 +32,8 @@ class Hijala :
     // Site moved from ZeistManga to MangaThemesia again
     override val versionId get() = 2
 
+    override fun chapterListSelector() = "div#chapterlist ul li:not([data-num*='{'])"
+
     override val client = network.cloudflareClient.newBuilder()
         .addInterceptor(::scrambledImageInterceptor)
         .build()

@@ -23,8 +23,10 @@ class AreaScans :
         dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale("ar")),
     ) {
 
-    override fun searchMangaSelector() = ".listupd .manga-card-v"
-    protected val searchMangaTitleSelector = ".bigor .tt, h3 a"
+    override fun popularMangaSelector() = ".listupd .manga-card-v, .listupd .bsx, .listupd .bs"
+    override fun latestUpdatesSelector() = popularMangaSelector()
+    override fun searchMangaSelector() = ".listupd .manga-card-v, .listupd .bsx, .listupd .bs"
+    protected val searchMangaTitleSelector = ".bigor .tt, h3 a, .tt"
 
     override fun searchMangaFromElement(element: Element): SManga = super.searchMangaFromElement(element).apply {
         title = element.selectFirst(searchMangaTitleSelector)?.text()?.takeIf(String::isNotEmpty) ?: element.selectFirst("a")!!.attr("title")

@@ -134,7 +134,7 @@ class MangaTime : HttpSource() {
         return result.chapters.map {
             SChapter.create().apply {
                 chapter_number = it.number.toFloat()
-                name = it.title
+                name = if (!it.title.isNullOrBlank()) it.title else "الفصل ${it.number}"
                 setUrlWithoutDomain("/chapter/${it.number}")
                 date_upload = dateFormat.tryParse(it.publishedAt)
             }

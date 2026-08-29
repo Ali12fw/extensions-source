@@ -14,6 +14,7 @@ class YonaBar :
     ) {
 
     override val useLoadMoreRequest = LoadMoreStrategy.Never
+    override val useNewChapterEndpoint = true
     override val mangaSubString = "yaoi"
 
     // The next page has an error; it’s a site issue

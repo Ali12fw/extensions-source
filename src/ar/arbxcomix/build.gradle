@@ -3,7 +3,7 @@ ext {
     extClass = '.ArbxComix'
     themePkg = 'madara'
     baseUrl = 'https://arbxcomix.com'
-    overrideVersionCode = 0
+    overrideVersionCode = 9
     isNsfw = true
 }
 

@@ -3,7 +3,7 @@ ext {
     extClass = '.Hadess'
     themePkg = 'madara'
     baseUrl = 'https://www.hadess.xyz'
-    overrideVersionCode = 0
+    overrideVersionCode = 4
     isNsfw = false
 }
 

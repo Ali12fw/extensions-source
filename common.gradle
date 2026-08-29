@@ -60,10 +60,11 @@ android {
 
     signingConfigs {
         release {
-            storeFile = rootProject.file("signingkey.jks")
-            storePassword = System.getenv("KEY_STORE_PASSWORD")
-            keyAlias = System.getenv("ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+            def keystoreFile = rootProject.file("release.jks").exists() ? rootProject.file("release.jks") : rootProject.file("signingkey.jks")
+            storeFile = keystoreFile
+            storePassword = System.getenv("KEY_STORE_PASSWORD") ?: "AliReleaseKey2026!"
+            keyAlias = System.getenv("ALIAS") ?: "ali-extensions"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "AliReleaseKey2026!"
         }
     }
 

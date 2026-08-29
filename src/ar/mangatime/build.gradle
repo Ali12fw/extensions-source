@@ -2,7 +2,7 @@ ext {
     extName = 'MangaTime'
     extClass = '.MangaTime'
     baseUrl = 'https://mangatime.org'
-    extVersionCode = 1
+    extVersionCode = 3
     isNsfw = false
 }
 
