@@ -3,7 +3,7 @@ ext {
     extClass = '.AreaScans'
     themePkg = 'mangathemesia'
     baseUrl = 'https://ar.kenmanga.com'
-    overrideVersionCode = 7
+    overrideVersionCode = 9
     isNsfw = false
 }
 

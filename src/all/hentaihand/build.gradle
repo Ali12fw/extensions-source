@@ -3,7 +3,7 @@ ext {
     extClass = '.HentaiHandFactory'
     themePkg = 'hentaihand'
     baseUrl = 'https://hentaihand.com'
-    overrideVersionCode = 9
+    overrideVersionCode = 11
     isNsfw = true
 }
 

@@ -3,7 +3,7 @@ ext {
     extClass = '.YonaBar'
     themePkg = 'madara'
     baseUrl = 'https://yonaber.com'
-    overrideVersionCode = 11
+    overrideVersionCode = 13
     isNsfw = true
 }
 

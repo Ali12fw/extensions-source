@@ -1,0 +1,245 @@
+[
+  {
+    "num": 1,
+    "name": "Team X",
+    "seriesTitle": "From Child Actor to Global Superstar!",
+    "topChapter": "الفصل 26 - اليوم الأول للتصوير!",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 2,
+    "name": "3Hentai",
+    "seriesTitle": "Aloner Lab 通り魔の蓮に犯された",
+    "topChapter": "Chapter",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 3,
+    "name": "Akuma",
+    "seriesTitle": "FAIL (Empty Feed Grid)",
+    "topChapter": "N/A",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Empty Feed Grid)",
+    "errorDetails": "08-29 19:37:41.001  9756  9756 I Quality : Skipped: true 1 cost 20.82898 refreshRate 0 processName app.komikku\r | 08-29 19:37:41.219  9756  9756 I Quality : Skipped: false 1 cost 23.879128 refreshRate 0 processName app.komikku\r"
+  },
+  {
+    "num": 4,
+    "name": "Anyone Manga",
+    "seriesTitle": "تصفَّح",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:38:10.219  2604  2977 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)\r"
+  },
+  {
+    "num": 5,
+    "name": "ArbxComix",
+    "seriesTitle": "دروس المزرعة",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:38:44.208 18746 18746 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@83c81; boundsInParent: Rect(0, 0 - 0, 0); boundsInScreen: Rect(0, 2040 - 114, 2184); packageName: app.komikku; className: android.view.View; text: null; error: nul"
+  },
+  {
+    "num": 6,
+    "name": "Area Scans",
+    "seriesTitle": "تصفَّح",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:39:16.424  9756  9756 I Quality : Skipped: true 1 cost 24.707851 refreshRate 0 processName app.komikku\r"
+  },
+  {
+    "num": 7,
+    "name": "Azora",
+    "seriesTitle": "لم يُعثر على أيِّ نتائج",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:39:49.724  3671  3671 E ModemAciService: CatchException oemModemAci2OplusModemAci():java.lang.IndexOutOfBoundsException: Index 103 out of bounds for length 55\r"
+  },
+  {
+    "num": 8,
+    "name": "Dilar",
+    "seriesTitle": "In The Depths Of Shame, Love Exists",
+    "topChapter": "الفصل 76.00",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 9,
+    "name": "Goon Scans",
+    "seriesTitle": "When I Returned to My Hometown, My Childhood Friend Was Broken",
+    "topChapter": "الفصل 11",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 10,
+    "name": "Hadess",
+    "seriesTitle": "لم يُعثر على أيِّ نتائج",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": ""
+  },
+  {
+    "num": 11,
+    "name": "HentaiHand",
+    "seriesTitle": "[AngryKuma] モナ (原神) (Czech)",
+    "topChapter": "Chapter",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 12,
+    "name": "Hijala",
+    "seriesTitle": "dog bite dog",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Synaptic Error)",
+    "errorDetails": ""
+  },
+  {
+    "num": 13,
+    "name": "Lava Scans (Thunder Scans)",
+    "seriesTitle": "Call of The Spear",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:44:16.684  2604  2977 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)\r | 08-29 19:44:17.389 21590 21590 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@b6555; boundsInParent"
+  },
+  {
+    "num": 14,
+    "name": "Manga Rose",
+    "seriesTitle": "لم يُعثر على أيِّ نتائج",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:44:48.347 21986 21986 E app_process: Error reading named image component header for /system/framework/boot.art, error: Unable to open file \"/system/framework/arm64/boot.art\" for reading image header\r | 08-29 19:44:48.347 21986 21986 E app_process: Could not create image space with image fil"
+  },
+  {
+    "num": 15,
+    "name": "Manga Starz",
+    "seriesTitle": "Call of the Spear",
+    "topChapter": "253",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 16,
+    "name": "MangaSwat",
+    "seriesTitle": "The Ruler Of Darkness",
+    "topChapter": "28",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 17,
+    "name": "MangaTime",
+    "seriesTitle": "غوسو — الأستاذ",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:47:13.164 22871 22871 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@cfa86; boundsInParent: Rect(0, 0 - 0, 0); boundsInScreen: Rect(513, 120 - 912, 264); packageName: app.komikku; className: android.view.View; text: null; error: nul"
+  },
+  {
+    "num": 18,
+    "name": "ProComic",
+    "seriesTitle": "Male God, Your Persona Has Collapsed!",
+    "topChapter": "2025",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 19,
+    "name": "WaveTeamy",
+    "seriesTitle": "The Demon King’s Channel",
+    "topChapter": "الفصل 2 - أليس هذا عهداً؟",
+    "readerStatus": "FAIL (خطأ HTTP ٤٠٤، انظر في WebView)",
+    "verdict": "FAIL (Reader Error)",
+    "errorDetails": "08-29 19:48:36.998 23594 23693 W FeatureFlagsImplExport: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available\r | 08-29 19:48:36.998 23594 23696 W FeatureFlagsImplExport: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no s"
+  },
+  {
+    "num": 20,
+    "name": "Yona Bar",
+    "seriesTitle": "The Last Ride",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:49:14.108 23934 23934 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@e2938; boundsInParent: Rect(0, 0 - 0, 0); boundsInScreen: Rect(506, 120 - 912, 264); packageName: app.komikku; className: android.view.View; text: null; error: nul"
+  },
+  {
+    "num": 21,
+    "name": "عرب تونز (Arab Toons)",
+    "seriesTitle": "A turning point",
+    "topChapter": "الفصل 133",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 22,
+    "name": "مانجا ليك (Mangalek)",
+    "seriesTitle": "لم يُعثر على أيِّ نتائج",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:50:31.833  1255  1255 I OplusPerfParmCount: The num of frame in last 60371 ms is: 819, jank frame is 93, DisplayHAL is 2, SurfaceFlingerCpuDeadlineMissed is 22, SurfaceFlingerGpuDeadlineMissed is 13, AppDeadlineMissed is 0, PredictionError is 31, SurfaceFlingerScheduling is 22, BufferStuffi"
+  },
+  {
+    "num": 23,
+    "name": "هنتاي العرب (Arabs Hentai)",
+    "seriesTitle": "تصفَّح",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": "08-29 19:51:24.235  2604  2977 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)\r"
+  },
+  {
+    "num": 24,
+    "name": "هنتاي سلاير (Hentai Slayer)",
+    "seriesTitle": "أوماكي",
+    "topChapter": "Chapter 1",
+    "readerStatus": "RENDERED (Visible on Screen)",
+    "verdict": "PASS",
+    "errorDetails": ""
+  },
+  {
+    "num": 25,
+    "name": "أخرى",
+    "seriesTitle": "Local source",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": ""
+  },
+  {
+    "num": 26,
+    "name": "Local source",
+    "seriesTitle": "لم يُعثر على أيِّ نتائج",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": ""
+  },
+  {
+    "num": 27,
+    "name": "&#127758; أخرى",
+    "seriesTitle": "لم يُعثر على أيِّ نتائج",
+    "topChapter": "FAIL (No Chapters Rendered)",
+    "readerStatus": "N/A",
+    "verdict": "FAIL (Chapter List Empty)",
+    "errorDetails": ""
+  }
+]

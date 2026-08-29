@@ -133,9 +133,10 @@ class MangaTime : HttpSource() {
 
         return result.chapters.map {
             SChapter.create().apply {
-                chapter_number = it.number.toFloat()
-                name = if (!it.title.isNullOrBlank()) it.title else "الفصل ${it.number}"
-                setUrlWithoutDomain("/chapter/${it.number}")
+                chapter_number = it.number
+                val numStr = it.number.toString().removeSuffix(".0")
+                name = if (!it.title.isNullOrBlank()) it.title else "الفصل $numStr"
+                setUrlWithoutDomain("/chapter/$numStr")
                 date_upload = dateFormat.tryParse(it.publishedAt)
             }
         }
@@ -148,7 +149,7 @@ class MangaTime : HttpSource() {
     override fun pageListRequest(chapter: SChapter): Request {
         val chapterUrl = getChapterUrl(chapter).toHttpUrl()
         val seriesSlug = chapterUrl.pathSegments[1]
-        val chapterNumber = chapterUrl.pathSegments[3].toInt()
+        val chapterNumber = chapterUrl.pathSegments[3].toFloatOrNull() ?: 1f
 
         return GET(trpcUrl("content.getChapterPages", PagesQuery(seriesSlug, chapterNumber).trpcJson()), headers)
     }

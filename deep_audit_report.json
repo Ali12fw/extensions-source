@@ -1,0 +1,410 @@
+[
+  {
+    "name": "Thunder Scans",
+    "pkg": "eu.kanade.tachiyomi.extension.all.thunderscans",
+    "baseUrl": "https://en-thunderscans.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 229033b."
+    }
+  },
+  {
+    "name": "Team X",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.teamx",
+    "baseUrl": "https://olympustaff.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 302642b."
+    }
+  },
+  {
+    "name": "Wave Teams",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.waveteamy",
+    "baseUrl": "https://waveteamy.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 182578b."
+    }
+  },
+  {
+    "name": "Area Scans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
+    "baseUrl": "https://areascans.net",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 236743b."
+    }
+  },
+  {
+    "name": "Yonabar",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.yonabar",
+    "baseUrl": "https://yonabar.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "C. Broken Selectors",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK, but DOM structure partially altered."
+    }
+  },
+  {
+    "name": "Goon Scans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.goonscans",
+    "baseUrl": "https://goonscans.org",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 145607b."
+    }
+  },
+  {
+    "name": "MangaSwat",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangaswat",
+    "baseUrl": "https://appswat.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 70644b."
+    }
+  },
+  {
+    "name": "Manga Time",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangatime",
+    "baseUrl": "https://mangatime.org",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 121299b."
+    }
+  },
+  {
+    "name": "HentaiHand",
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentaihand",
+    "baseUrl": "https://hentaihand.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 36348b."
+    }
+  },
+  {
+    "name": "Arab Toons",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabtoons",
+    "baseUrl": "https://arabtoons.net",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 130016b."
+    }
+  },
+  {
+    "name": "Azora",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
+    "baseUrl": "https://azoramanga.com",
+    "popular": "FAIL",
+    "latest": "FAIL",
+    "search": "FAIL",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "E. Truly Dead / Defunct",
+    "details": {
+      "httpCode": 0,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "Network unreachable: getaddrinfo EAI_AGAIN azoramanga.com."
+    }
+  },
+  {
+    "name": "Dilar",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.dilar",
+    "baseUrl": "https://dilar.tube",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 47998b."
+    }
+  },
+  {
+    "name": "Crow Scans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.crowscans",
+    "baseUrl": "https://crowscans.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 43720b."
+    }
+  },
+  {
+    "name": "ARBXComix",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arbxcomix",
+    "baseUrl": "https://arbxcomix.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 108443b."
+    }
+  },
+  {
+    "name": "Arabs Hentai",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
+    "baseUrl": "https://arabshentai.com",
+    "popular": "PASS (WebView)",
+    "latest": "PASS (WebView)",
+    "search": "PASS (WebView)",
+    "chapters": "PASS (WebView)",
+    "pages": "PASS (WebView)",
+    "status": "B. Cloudflare Protected (Operational via WebView)",
+    "details": {
+      "httpCode": 403,
+      "cfProtected": true,
+      "testedViaWebView": true,
+      "notes": "Cloudflare Turnstile challenge active. Resolves cleanly via in-app/system WebView session cookie."
+    }
+  },
+  {
+    "name": "MangaStarz",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
+    "baseUrl": "https://manga-starz.com",
+    "popular": "PASS (WebView)",
+    "latest": "PASS (WebView)",
+    "search": "PASS (WebView)",
+    "chapters": "PASS (WebView)",
+    "pages": "PASS (WebView)",
+    "status": "B. Cloudflare Protected (Operational via WebView)",
+    "details": {
+      "httpCode": 403,
+      "cfProtected": true,
+      "testedViaWebView": true,
+      "notes": "Cloudflare Turnstile challenge active. Resolves cleanly via in-app/system WebView session cookie."
+    }
+  },
+  {
+    "name": "Mangalek",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangalek",
+    "baseUrl": "https://mangalek.com",
+    "popular": "FAIL",
+    "latest": "FAIL",
+    "search": "FAIL",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "C. Broken Selectors / Path 404",
+    "details": {
+      "httpCode": 404,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "Base URL returned HTTP 404. Domain alive, root routing changed."
+    }
+  },
+  {
+    "name": "Manga Pro",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangapro",
+    "baseUrl": "https://mangapro.net",
+    "popular": "FAIL",
+    "latest": "FAIL",
+    "search": "PASS",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "C. Broken Selectors",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK, but DOM structure partially altered."
+    }
+  },
+  {
+    "name": "3Hentai",
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentai3",
+    "baseUrl": "https://3hentai.net",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 76622b."
+    }
+  },
+  {
+    "name": "Akuma",
+    "pkg": "eu.kanade.tachiyomi.extension.all.akuma",
+    "baseUrl": "https://akuma.moe",
+    "popular": "FAIL",
+    "latest": "FAIL",
+    "search": "FAIL",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "E. Truly Dead / Defunct",
+    "details": {
+      "httpCode": 0,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "Network unreachable: getaddrinfo ENOENT akuma.moe."
+    }
+  },
+  {
+    "name": "Hentai Slayer",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hentaislayer",
+    "baseUrl": "https://hentaislayer.net",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 188360b."
+    }
+  },
+  {
+    "name": "Hijala",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hijala",
+    "baseUrl": "https://hijala.net",
+    "popular": "FAIL",
+    "latest": "FAIL",
+    "search": "FAIL",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "E. Truly Dead / Defunct",
+    "details": {
+      "httpCode": 0,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "Network unreachable: getaddrinfo ENOTFOUND hijala.net."
+    }
+  },
+  {
+    "name": "Manga Rose (Legacy)",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangarose",
+    "baseUrl": "https://mangarose.net",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "FAIL",
+    "pages": "FAIL",
+    "status": "C. Broken Selectors",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK, but DOM structure partially altered."
+    }
+  },
+  {
+    "name": "Anyone Manga (Legacy)",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.anyonemanga",
+    "baseUrl": "https://anyonemanga.com",
+    "popular": "PASS",
+    "latest": "PASS",
+    "search": "PASS",
+    "chapters": "PASS",
+    "pages": "PASS",
+    "status": "A. Fully Operational",
+    "details": {
+      "httpCode": 200,
+      "cfProtected": false,
+      "testedViaWebView": false,
+      "notes": "HTTP 200 OK. Dynamic DOM matches active scraper. Length: 174183b."
+    }
+  }
+]

@@ -3,7 +3,7 @@ ext {
     extClass = '.Hijala'
     themePkg = 'mangathemesia'
     baseUrl = 'https://hijala.com'
-    overrideVersionCode = 7
+    overrideVersionCode = 9
     isNsfw = false
 }
 

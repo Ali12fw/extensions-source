@@ -2,8 +2,8 @@ ext {
     extName = 'Azora'
     extClass = '.Azora'
     themePkg = 'iken'
-    baseUrl = 'https://azoramoon.com'
-    overrideVersionCode = 58
+    baseUrl = 'https://azorafly.com'
+    overrideVersionCode = 62
     isNsfw = false
 }
 

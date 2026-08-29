@@ -2,7 +2,7 @@ ext {
     extName = 'Goon Scans'
     extClass = '.GoonScans'
     baseUrl = 'https://goonscans.org'
-    extVersionCode = 35
+    extVersionCode = 37
     isNsfw = true
 }
 

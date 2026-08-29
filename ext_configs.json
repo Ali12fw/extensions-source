@@ -1,0 +1,200 @@
+[
+  {
+    "id": "thunderscans",
+    "dir": "src/all/thunderscans",
+    "pkg": "eu.kanade.tachiyomi.extension.all.thunderscans",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "ThunderScansFactory",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "teamx",
+    "dir": "src/ar/teamx",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.teamx",
+    "theme": null,
+    "baseUrl": "https://olympustaff.com",
+    "mainClass": "TeamX",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "waveteamy",
+    "dir": "src/ar/waveteamy",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.waveteamy",
+    "theme": null,
+    "baseUrl": "https://waveteamy.com",
+    "mainClass": "WaveTeamy",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "areascans",
+    "dir": "src/ar/areascans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "AreaScans",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "yonabar",
+    "dir": "src/ar/yonabar",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.yonabar",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "YonaBar",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "goonscans",
+    "dir": "src/ar/goonscans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.goonscans",
+    "theme": null,
+    "baseUrl": "https://goonscans.org",
+    "mainClass": "GoonScans",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "mangaswat",
+    "dir": "src/ar/mangaswat",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangaswat",
+    "theme": null,
+    "baseUrl": "https://appswat.com/v2/api/v2",
+    "mainClass": "MangaSwat",
+    "ktFilesCount": 2
+  },
+  {
+    "id": "mangatime",
+    "dir": "src/ar/mangatime",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangatime",
+    "theme": null,
+    "baseUrl": "https://mangatime.org",
+    "mainClass": "MangaTime",
+    "ktFilesCount": 2
+  },
+  {
+    "id": "hentaihand",
+    "dir": "src/all/hentaihand",
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentaihand",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "HentaiHandFactory",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "arabtoons",
+    "dir": "src/ar/arabtoons",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabtoons",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "ArabToons",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "azora",
+    "dir": "src/ar/azora",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "Azora",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "dilar",
+    "dir": "src/ar/dilar",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.dilar",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "Dilar",
+    "ktFilesCount": 3
+  },
+  {
+    "id": "crowscans",
+    "dir": "src/ar/crowscans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.crowscans",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "Hadess",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "arbxcomix",
+    "dir": "src/ar/arbxcomix",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arbxcomix",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "ArbxComix",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "arabshentai",
+    "dir": "src/ar/arabshentai",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
+    "theme": null,
+    "baseUrl": "https://arabshentai.com",
+    "mainClass": "ArabsHentai",
+    "ktFilesCount": 2
+  },
+  {
+    "id": "mangastarz",
+    "dir": "src/ar/mangastarz",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "MangaStarz",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "mangalek",
+    "dir": "src/ar/mangalek",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangalek",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "Mangalek",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "mangapro",
+    "dir": "src/ar/mangapro",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangapro",
+    "theme": null,
+    "baseUrl": "https://$domain",
+    "mainClass": "ScrambledImage",
+    "ktFilesCount": 4
+  },
+  {
+    "id": "hentai3",
+    "dir": "src/all/hentai3",
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentai3",
+    "theme": null,
+    "baseUrl": "https://3hentai.net",
+    "mainClass": "Hentai3",
+    "ktFilesCount": 3
+  },
+  {
+    "id": "akuma",
+    "dir": "src/all/akuma",
+    "pkg": "eu.kanade.tachiyomi.extension.all.akuma",
+    "theme": null,
+    "baseUrl": "https://akuma.moe",
+    "mainClass": "Akuma",
+    "ktFilesCount": 5
+  },
+  {
+    "id": "hentaislayer",
+    "dir": "src/ar/hentaislayer",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hentaislayer",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "HentaiSlayer",
+    "ktFilesCount": 1
+  },
+  {
+    "id": "hijala",
+    "dir": "src/ar/hijala",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hijala",
+    "theme": null,
+    "baseUrl": null,
+    "mainClass": "Hijala",
+    "ktFilesCount": 1
+  }
+]

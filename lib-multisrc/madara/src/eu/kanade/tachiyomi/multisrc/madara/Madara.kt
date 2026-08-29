@@ -173,7 +173,7 @@ abstract class Madara(
         with(element) {
             selectFirst(popularMangaUrlSelector)!!.let {
                 manga.setUrlWithoutDomain(it.attr("abs:href"))
-                manga.title = it.ownText()
+                manga.title = it.ownText().ifBlank { it.text() }.trim()
             }
 
             selectFirst(popularMangaUrlSelectorImg)?.let {

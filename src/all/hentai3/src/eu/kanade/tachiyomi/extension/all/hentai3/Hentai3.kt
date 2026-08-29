@@ -36,27 +36,57 @@ open class Hentai3(
         .set("origin", baseUrl)
 
     // Popular
-    override fun popularMangaRequest(page: Int): Request = GET("$baseUrl/${if (searchLang.isNotEmpty()) "language/$searchLang/${if (page > 1) page else ""}?" else "search?q=pages%3A>0&pages=$page&"}sort=popular", headers)
+    override fun popularMangaRequest(page: Int): Request = GET(
+        if (searchLang.isNotEmpty()) {
+            if (page > 1) "$baseUrl/language/$searchLang/?page=$page&sort=popular" else "$baseUrl/language/$searchLang/?sort=popular"
+        } else {
+            if (page > 1) "$baseUrl/?page=$page&sort=popular" else "$baseUrl/?sort=popular"
+        },
+        headers,
+    )
 
     override fun popularMangaParse(response: Response): MangasPage {
         val doc = response.asJsoup()
+        val container = doc.select("div.listing-container").firstOrNull() ?: doc
 
-        val mangas = doc.select("a[href*=/d/]").map(::popularMangaFromElement)
+        val mangas = container.select("div.doujin-col > a, a[href*=/d/]").map(::popularMangaFromElement)
         val hasNextPage = doc.selectFirst("a[rel=next]") != null
 
         return MangasPage(mangas, hasNextPage)
     }
 
     private fun popularMangaFromElement(element: Element): SManga = SManga.create().apply {
-        title = element.selectFirst("div")!!.ownText()
+        title = element.selectFirst("div.title")?.ownText()?.trim()
+            ?: element.selectFirst("div")?.ownText()?.trim()
+            ?: element.attr("title").ifEmpty { "Doujin" }
         setUrlWithoutDomain(element.absUrl("href"))
-        thumbnail_url = element.selectFirst("img:not([class])")!!.absUrl("src")
+        val img = element.selectFirst("img")
+        thumbnail_url = img?.let {
+            it.attr("abs:data-src").ifEmpty { it.attr("data-src") }.ifEmpty { it.attr("abs:src") }.ifEmpty { it.attr("src") }
+        }
     }
 
     // Latest
-    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/${if (searchLang.isNotEmpty()) "language/$searchLang/$page" else "search?q=pages%3A>0&pages=$page"}", headers)
+    override fun latestUpdatesRequest(page: Int): Request = GET(
+        if (searchLang.isNotEmpty()) {
+            if (page > 1) "$baseUrl/language/$searchLang/?page=$page" else "$baseUrl/language/$searchLang/"
+        } else {
+            if (page > 1) "$baseUrl/?page=$page" else "$baseUrl/"
+        },
+        headers,
+    )
 
-    override fun latestUpdatesParse(response: Response): MangasPage = popularMangaParse(response)
+    override fun latestUpdatesParse(response: Response): MangasPage {
+        val doc = response.asJsoup()
+        val container = doc.select("h2:contains(Newest hentai) + div.listing-container").firstOrNull()
+            ?: doc.select("div.listing-container").lastOrNull()
+            ?: doc
+
+        val mangas = container.select("div.doujin-col > a, a[href*=/d/]").map(::popularMangaFromElement)
+        val hasNextPage = doc.selectFirst("a[rel=next]") != null
+
+        return MangasPage(mangas, hasNextPage)
+    }
 
     // Search
 

@@ -186,14 +186,18 @@ class WaveTeamy : HttpSource() {
     }
 
     fun String.toImage(): String {
-        val t = this.replace(" ", "%20")
+        val trimmed = this.trim().replace(" ", "%20")
+        val withoutSlash = trimmed.removePrefix("/")
         return when {
-            this.startsWith("http") -> t
-            this.startsWith("projects") ||
-                this.startsWith("series") ||
-                this.startsWith("users") -> "$cloudUrl/$t"
+            trimmed.startsWith("http") -> trimmed
+            withoutSlash.startsWith("projects") ||
+                withoutSlash.startsWith("series") ||
+                withoutSlash.startsWith("users") ||
+                withoutSlash.startsWith("images") ||
+                withoutSlash.startsWith("covers") ||
+                withoutSlash.startsWith("upload") -> "$cloudUrl/$withoutSlash"
             else ->
-                "$baseUrl/$t"
+                "$cloudUrl/$withoutSlash"
         }
     }
 

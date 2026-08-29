@@ -67,9 +67,9 @@ class ChaptersDto(
 
 @Serializable
 class Chapter(
-    val number: Int,
-    val title: String,
-    val publishedAt: String?,
+    val number: Float,
+    val title: String? = null,
+    val publishedAt: String? = null,
 )
 
 // pages
@@ -129,7 +129,7 @@ class ChaptersQuery(
 @Serializable
 class PagesQuery(
     val seriesSlug: String,
-    val chapterNumber: Int,
+    val chapterNumber: Float,
 )
 
 @Serializable

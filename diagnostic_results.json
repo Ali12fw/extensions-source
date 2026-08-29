@@ -1,0 +1,794 @@
+[
+  {
+    "name": "Thunder Scans",
+    "id": "thunderscans",
+    "pkg": "eu.kanade.tachiyomi.extension.all.thunderscans",
+    "baseUrl": "https://en-thunderscans.com",
+    "dns": {
+      "resolved": true,
+      "ip": "104.26.4.95"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"Thunderscans EN &#8211; Best Site To Rea\", Length: 228964b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Team X",
+    "id": "teamx",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.teamx",
+    "baseUrl": "https://olympustaff.com",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.70.106"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"الرئيسية - teamxmanga mnhaestate teamx |\", Length: 302642b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Wave Teams",
+    "id": "waveteamy",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.waveteamy",
+    "baseUrl": "https://waveteamy.com",
+    "dns": {
+      "resolved": true,
+      "ip": "172.67.156.24"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"ويف سكانز | Wave scans\", Length: 182575b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Area Scans",
+    "id": "areascans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
+    "baseUrl": "https://areascans.net",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.74.114"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"AREA Manga | أريا مانجا | نجعل القصص الك\", Length: 236743b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Yonabar",
+    "id": "yonabar",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.yonabar",
+    "baseUrl": "https://yonabar.com",
+    "dns": {
+      "resolved": true,
+      "ip": "172.237.146.39"
+    },
+    "popular": {
+      "pass": false,
+      "details": "HTTP unable to get local issuer certificate"
+    },
+    "latest": {
+      "pass": false,
+      "details": ""
+    },
+    "search": {
+      "pass": false,
+      "details": ""
+    },
+    "chapters": {
+      "pass": false,
+      "details": ""
+    },
+    "pages": {
+      "pass": false,
+      "details": ""
+    },
+    "cloudflareProtected": false,
+    "classification": "C. Broken Selectors",
+    "notes": ""
+  },
+  {
+    "name": "Goon Scans",
+    "id": "goonscans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.goonscans",
+    "baseUrl": "https://goonscans.org",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.0.137"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"موقع قوون - مانجا ايتشي مترجمة للعربي\", Length: 151915b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "MangaSwat",
+    "id": "mangaswat",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangaswat",
+    "baseUrl": "https://appswat.com",
+    "dns": {
+      "resolved": true,
+      "ip": "149.202.83.217"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"Swat Manga\", Length: 70644b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Manga Time",
+    "id": "mangatime",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangatime",
+    "baseUrl": "https://mangatime.org",
+    "dns": {
+      "resolved": true,
+      "ip": "172.67.179.78"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"مانجا ومانهوا مترجمة عربية — قراءة عربية\", Length: 121300b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "HentaiHand",
+    "id": "hentaihand",
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentaihand",
+    "baseUrl": "https://hentaihand.com",
+    "dns": {
+      "resolved": true,
+      "ip": "172.67.199.77"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"Home | HentaiHand: Free Hentai Manga, Do\", Length: 36348b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Arab Toons",
+    "id": "arabtoons",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabtoons",
+    "baseUrl": "https://arabtoons.net",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.20.36"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"هنتاي مانجا مانهوا مانها مترجم عربي - عر\", Length: 130015b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Azora",
+    "id": "azora",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
+    "baseUrl": "https://azoramoon.com",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.45.237"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"AZORA MANGA ازورا مانجا - AZORA MANGA از\", Length: 500347b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": "Primary domain dead (ESERVFAIL), mirror alive at https://azoramoon.com. "
+  },
+  {
+    "name": "Dilar",
+    "id": "dilar",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.dilar",
+    "baseUrl": "https://dilar.tube",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.69.209"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"Dilar - الصفحة الرئيسية\", Length: 47998b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Crow Scans",
+    "id": "crowscans",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.crowscans",
+    "baseUrl": "https://crowscans.com",
+    "dns": {
+      "resolved": true,
+      "ip": "13.223.25.84"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"CrowScans.com is for sale | HugeDomains\", Length: 43720b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "ARBXComix",
+    "id": "arbxcomix",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arbxcomix",
+    "baseUrl": "https://arbxcomix.com",
+    "dns": {
+      "resolved": true,
+      "ip": "187.124.165.20"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"عرب سكس كوميكس &#8211; قصص سكس مصورة متر\", Length: 108443b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Arabs Hentai",
+    "id": "arabshentai",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
+    "baseUrl": "https://arabshentai.com",
+    "dns": {
+      "resolved": true,
+      "ip": "104.20.43.87"
+    },
+    "popular": {
+      "pass": false,
+      "details": "HTTP 403 (Cloudflare challenge active)"
+    },
+    "latest": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "search": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "chapters": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "pages": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "cloudflareProtected": true,
+    "classification": "B. Cloudflare Protected (Operational via WebView)",
+    "notes": ""
+  },
+  {
+    "name": "MangaStarz",
+    "id": "mangastarz",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
+    "baseUrl": "https://manga-starz.com",
+    "dns": {
+      "resolved": true,
+      "ip": "172.67.223.89"
+    },
+    "popular": {
+      "pass": false,
+      "details": "HTTP 403 (Cloudflare challenge active)"
+    },
+    "latest": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "search": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "chapters": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "pages": {
+      "pass": false,
+      "details": "Pending WebView clearance"
+    },
+    "cloudflareProtected": true,
+    "classification": "B. Cloudflare Protected (Operational via WebView)",
+    "notes": ""
+  },
+  {
+    "name": "Mangalek",
+    "id": "mangalek",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangalek",
+    "baseUrl": "https://mangalek.com",
+    "dns": {
+      "resolved": true,
+      "ip": "172.67.207.193"
+    },
+    "popular": {
+      "pass": false,
+      "details": "HTTP 404"
+    },
+    "latest": {
+      "pass": false,
+      "details": ""
+    },
+    "search": {
+      "pass": false,
+      "details": ""
+    },
+    "chapters": {
+      "pass": false,
+      "details": ""
+    },
+    "pages": {
+      "pass": false,
+      "details": ""
+    },
+    "cloudflareProtected": false,
+    "classification": "C. Broken Selectors",
+    "notes": ""
+  },
+  {
+    "name": "Manga Pro",
+    "id": "mangapro",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangapro",
+    "baseUrl": "https://mangapro.net",
+    "dns": {
+      "resolved": true,
+      "ip": "13.248.169.48"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"\", Length: 114b"
+    },
+    "latest": {
+      "pass": false,
+      "details": "Latest feed structure altered"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": false,
+      "details": "Chapters require subpage extraction"
+    },
+    "pages": {
+      "pass": false,
+      "details": "Reader canvas / dynamic JS rendering"
+    },
+    "cloudflareProtected": false,
+    "classification": "C. Broken Selectors",
+    "notes": "Primary domain dead (ENOTFOUND), mirror alive at https://mangapro.net. "
+  },
+  {
+    "name": "3Hentai",
+    "id": "hentai3",
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentai3",
+    "baseUrl": "https://3hentai.net",
+    "dns": {
+      "resolved": true,
+      "ip": "146.59.108.111"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"3Hentai - Free Hentai Manga &amp; Doujin\", Length: 76616b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Akuma",
+    "id": "akuma",
+    "pkg": "eu.kanade.tachiyomi.extension.all.akuma",
+    "baseUrl": "https://akuma.moe",
+    "dns": {
+      "resolved": true,
+      "ip": "0.0.0.0"
+    },
+    "popular": {
+      "pass": false,
+      "details": "HTTP getaddrinfo ENOENT akuma.moe"
+    },
+    "latest": {
+      "pass": false,
+      "details": ""
+    },
+    "search": {
+      "pass": false,
+      "details": ""
+    },
+    "chapters": {
+      "pass": false,
+      "details": ""
+    },
+    "pages": {
+      "pass": false,
+      "details": ""
+    },
+    "cloudflareProtected": false,
+    "classification": "C. Broken Selectors",
+    "notes": ""
+  },
+  {
+    "name": "Hentai Slayer",
+    "id": "hentaislayer",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hentaislayer",
+    "baseUrl": "https://hentaislayer.net",
+    "dns": {
+      "resolved": true,
+      "ip": "172.67.185.87"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"هنتاي سلاير | الرئيسية\", Length: 188362b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  },
+  {
+    "name": "Hijala",
+    "id": "hijala",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hijala",
+    "baseUrl": "https://hijala.top",
+    "dns": {
+      "resolved": false,
+      "error": "ENOTFOUND"
+    },
+    "popular": {
+      "pass": false,
+      "details": ""
+    },
+    "latest": {
+      "pass": false,
+      "details": ""
+    },
+    "search": {
+      "pass": false,
+      "details": ""
+    },
+    "chapters": {
+      "pass": false,
+      "details": ""
+    },
+    "pages": {
+      "pass": false,
+      "details": ""
+    },
+    "cloudflareProtected": false,
+    "classification": "E. Truly Dead / Defunct",
+    "notes": "Domain offline, DNS ENOTFOUND. "
+  },
+  {
+    "name": "Manga Rose (Legacy)",
+    "id": "mangarose",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangarose",
+    "baseUrl": "https://mangarose.net",
+    "dns": {
+      "resolved": true,
+      "ip": "172.236.114.191"
+    },
+    "popular": {
+      "pass": false,
+      "details": "HTTP unable to get local issuer certificate"
+    },
+    "latest": {
+      "pass": false,
+      "details": ""
+    },
+    "search": {
+      "pass": false,
+      "details": ""
+    },
+    "chapters": {
+      "pass": false,
+      "details": ""
+    },
+    "pages": {
+      "pass": false,
+      "details": ""
+    },
+    "cloudflareProtected": false,
+    "classification": "C. Broken Selectors",
+    "notes": "Primary domain dead (ENOTFOUND), mirror alive at https://mangarose.net. "
+  },
+  {
+    "name": "Anyone Manga (Legacy)",
+    "id": "anyonemanga",
+    "pkg": "eu.kanade.tachiyomi.extension.ar.anyonemanga",
+    "baseUrl": "https://anyonemanga.com",
+    "dns": {
+      "resolved": true,
+      "ip": "104.21.94.81"
+    },
+    "popular": {
+      "pass": true,
+      "details": "200 OK, Title: \"Anyone Manga: أفضل موقع مانجا مترجمة بال\", Length: 174250b"
+    },
+    "latest": {
+      "pass": true,
+      "details": "Feed contains chapter updates/timestamps"
+    },
+    "search": {
+      "pass": true,
+      "details": "Search/filter parameters present"
+    },
+    "chapters": {
+      "pass": true,
+      "details": "Chapter listing elements detected"
+    },
+    "pages": {
+      "pass": true,
+      "details": "Image CDN references detected"
+    },
+    "cloudflareProtected": false,
+    "classification": "A. Fully Operational",
+    "notes": ""
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.all.thunderscans",
+    "vName": "1.4.46",
+    "vCode": "46",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.teamx",
+    "vName": "1.4.34",
+    "vCode": "34",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.waveteamy",
+    "vName": "1.4.4",
+    "vCode": "4",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.areascans",
+    "vName": "1.4.36",
+    "vCode": "36",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.yonabar",
+    "vName": "1.4.55",
+    "vCode": "55",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.goonscans",
+    "vName": "1.4.34",
+    "vCode": "34",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangaswat",
+    "vName": "1.4.62",
+    "vCode": "62",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangatime",
+    "vName": "1.4.2",
+    "vCode": "2",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentaihand",
+    "vName": "1.4.12",
+    "vCode": "12",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabtoons",
+    "vName": "1.4.54",
+    "vCode": "54",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
+    "vName": "1.4.73",
+    "vCode": "73",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.dilar",
+    "vName": "1.4.12",
+    "vCode": "12",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.crowscans",
+    "vName": "1.4.48",
+    "vCode": "48",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arbxcomix",
+    "vName": "1.4.53",
+    "vCode": "53",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.arabshentai",
+    "vName": "1.4.5",
+    "vCode": "5",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangastarz",
+    "vName": "1.4.62",
+    "vCode": "62",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangalek",
+    "vName": "1.4.66",
+    "vCode": "66",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.mangapro",
+    "vName": "1.4.64",
+    "vCode": "64",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.all.hentai3",
+    "vName": "1.4.6",
+    "vCode": "6",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.all.akuma",
+    "vName": "1.4.11",
+    "vCode": "11",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hentaislayer",
+    "vName": "1.4.7",
+    "vCode": "7",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  },
+  {
+    "pkg": "eu.kanade.tachiyomi.extension.ar.hijala",
+    "vName": "1.4.36",
+    "vCode": "36",
+    "owner": "CN=Ali, OU=Extensions, O=AliDev, L=Cairo, ST=Cairo, C=EG",
+    "sha256": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "verified": true
+  }
+]

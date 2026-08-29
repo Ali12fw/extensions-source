@@ -151,8 +151,10 @@ abstract class MangaThemesia(
 
     override fun searchMangaFromElement(element: Element) = SManga.create().apply {
         thumbnail_url = element.select("img").imgAttr()
-        title = element.select("a").attr("title")
-        setUrlWithoutDomain(element.select("a").attr("href"))
+        val titleElement = element.selectFirst(".bigor .tt, .tt, h2, h3, h4")
+        title = element.select("a").attr("title").ifEmpty { titleElement?.text().orEmpty().ifEmpty { element.select("a").text() } }.trim()
+        val link = element.selectFirst("a[href*=$mangaUrlDirectory], a") ?: element.select("a").first()!!
+        setUrlWithoutDomain(link.attr("href"))
     }
 
     override fun searchMangaNextPageSelector() = "div.pagination .next, div.hpage .r"
