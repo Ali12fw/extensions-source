@@ -1,0 +1,232 @@
+{
+  "name": "Ali's Custom Extensions",
+  "badgeLabel": "Ali",
+  "signingKey": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+  "contact": {
+    "github": "https://github.com/Ali12fw/extensions-source"
+  },
+  "extensionList": {
+    "extensions": [
+      {
+        "name": "Thunder Scans",
+        "packageName": "eu.kanade.tachiyomi.extension.all.thunderscans",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-all.thunderscans-v1.4.46.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.46",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "Team X",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.teamx",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.teamx-v1.4.34.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.34",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "WaveTeamy",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.waveteamy",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.waveteamy-v1.4.4.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.4",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "Area Scans",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.areascans",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.areascans-v1.4.36.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.36",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "Yona Bar",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.yonabar",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.yonabar-v1.4.55.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.55",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Goon Scans",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.goonscans",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.goonscans-v1.4.34.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.34",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "MangaSwat",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.mangaswat",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.mangaswat-v1.4.62.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.62",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "MangaTime",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.mangatime",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.mangatime-v1.4.2.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.2",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "HentaiHand",
+        "packageName": "eu.kanade.tachiyomi.extension.all.hentaihand",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-all.hentaihand-v1.4.12.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.12",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Arab Toons",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.arabtoons",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.arabtoons-v1.4.54.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.54",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Azora",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.azora",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.azora-v1.4.73.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.73",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "Dilar",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.dilar",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.dilar-v1.4.12.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.12",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "Hadess",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.crowscans",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.crowscans-v1.4.48.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.48",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "ArbxComix",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.arbxcomix",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.arbxcomix-v1.4.53.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.53",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Arabs Hentai",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.arabshentai",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.arabshentai-v1.4.5.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.5",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Manga Starz",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.mangastarz",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.mangastarz-v1.4.62.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.62",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "Mangalek",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.mangalek",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.mangalek-v1.4.66.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.66",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      },
+      {
+        "name": "ProComic",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.mangapro",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.mangapro-v1.4.64.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.64",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "3Hentai",
+        "packageName": "eu.kanade.tachiyomi.extension.all.hentai3",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-all.hentai3-v1.4.6.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.6",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Akuma",
+        "packageName": "eu.kanade.tachiyomi.extension.all.akuma",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-all.akuma-v1.4.11.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.11",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Hentai Slayer",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.hentaislayer",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.hentaislayer-v1.4.7.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.7",
+        "contentWarning": "CONTENT_WARNING_NSFW"
+      },
+      {
+        "name": "Hijala",
+        "packageName": "eu.kanade.tachiyomi.extension.ar.hijala",
+        "resources": {
+          "apkUrl": "apk/tachiyomi-ar.hijala-v1.4.36.apk"
+        },
+        "extensionLib": "1.4",
+        "versionName": "1.4.36",
+        "contentWarning": "CONTENT_WARNING_SAFE"
+      }
+    ]
+  }
+}
