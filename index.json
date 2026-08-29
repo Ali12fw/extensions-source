@@ -16,7 +16,8 @@
       }
     ],
     "size": 73728,
-    "sha256": "0d3c3d0c22ad5333b0c9236f6c7f24e9103865e796120f471afea878143666f6"
+    "sha256": "0d3c3d0c22ad5333b0c9236f6c7f24e9103865e796120f471afea878143666f6",
+    "versionCode": 47
   },
   {
     "name": "Team X",
@@ -35,7 +36,8 @@
       }
     ],
     "size": 46783,
-    "sha256": "aaf319f1457777bf804dc8756516f4d6f46288296980766885b1756158661487"
+    "sha256": "aaf319f1457777bf804dc8756516f4d6f46288296980766885b1756158661487",
+    "versionCode": 35
   },
   {
     "name": "WaveTeamy",
@@ -54,7 +56,8 @@
       }
     ],
     "size": 79177,
-    "sha256": "7ae51f5585044dc74dd129edd109405fbba172894115932b1d81ec82d330d4de"
+    "sha256": "7ae51f5585044dc74dd129edd109405fbba172894115932b1d81ec82d330d4de",
+    "versionCode": 5
   },
   {
     "name": "Area Scans",
@@ -73,7 +76,8 @@
       }
     ],
     "size": 100138,
-    "sha256": "1fd88e990b0daaf1f4c58d2903a140c152ac359f8dd1e44a4452e8d2250fc754"
+    "sha256": "1fd88e990b0daaf1f4c58d2903a140c152ac359f8dd1e44a4452e8d2250fc754",
+    "versionCode": 37
   },
   {
     "name": "Yona Bar",
@@ -92,7 +96,8 @@
       }
     ],
     "size": 81627,
-    "sha256": "eee3fb2026a2a6954541201f80a28f8c1843553e1366fdd50402d51718c29087"
+    "sha256": "eee3fb2026a2a6954541201f80a28f8c1843553e1366fdd50402d51718c29087",
+    "versionCode": 56
   },
   {
     "name": "Goon Scans",
@@ -111,7 +116,8 @@
       }
     ],
     "size": 125321,
-    "sha256": "05835572c58137b90b593476675457945a6ffdaaf6c0697bf40a24c10e08b465"
+    "sha256": "05835572c58137b90b593476675457945a6ffdaaf6c0697bf40a24c10e08b465",
+    "versionCode": 35
   },
   {
     "name": "MangaSwat",
@@ -130,7 +136,8 @@
       }
     ],
     "size": 70057,
-    "sha256": "ef4f23c53ba4742961103c8eac77110ee5ba6db6e40c0c0aba2159735dad26dd"
+    "sha256": "ef4f23c53ba4742961103c8eac77110ee5ba6db6e40c0c0aba2159735dad26dd",
+    "versionCode": 63
   },
   {
     "name": "MangaTime",
@@ -149,7 +156,8 @@
       }
     ],
     "size": 96150,
-    "sha256": "4c9bb6e05e2fd8dfe978efe52e1a57da22814e91bdee420c677f1de4f4fa0843"
+    "sha256": "4c9bb6e05e2fd8dfe978efe52e1a57da22814e91bdee420c677f1de4f4fa0843",
+    "versionCode": 3
   },
   {
     "name": "HentaiHand",
@@ -168,7 +176,8 @@
       }
     ],
     "size": 67962,
-    "sha256": "c863440a73a6ed8f64de37a40737a05b88c5c3116df920541254b1aa4c51da4b"
+    "sha256": "c863440a73a6ed8f64de37a40737a05b88c5c3116df920541254b1aa4c51da4b",
+    "versionCode": 13
   },
   {
     "name": "Arab Toons",
@@ -187,7 +196,8 @@
       }
     ],
     "size": 82179,
-    "sha256": "a4e69079f5187d2c5f80540dac866aa8aad37f21bc65f18e1b16b83a91413351"
+    "sha256": "a4e69079f5187d2c5f80540dac866aa8aad37f21bc65f18e1b16b83a91413351",
+    "versionCode": 55
   },
   {
     "name": "Azora",
@@ -206,7 +216,8 @@
       }
     ],
     "size": 85446,
-    "sha256": "97b8866125db51cbf947af4058634050bd6363061c949ab55c84f6a92c5ffcf9"
+    "sha256": "97b8866125db51cbf947af4058634050bd6363061c949ab55c84f6a92c5ffcf9",
+    "versionCode": 74
   },
   {
     "name": "Dilar",
@@ -225,7 +236,8 @@
       }
     ],
     "size": 113423,
-    "sha256": "767e7dfacfe93192774f4612e70607e9b7539d568bcee563059ddafef79f3741"
+    "sha256": "767e7dfacfe93192774f4612e70607e9b7539d568bcee563059ddafef79f3741",
+    "versionCode": 13
   },
   {
     "name": "Hadess",
@@ -244,7 +256,8 @@
       }
     ],
     "size": 103298,
-    "sha256": "69811f5584bab2ab7255f89240f15dd4d1cb548b7ba0f53b434fee134499273e"
+    "sha256": "69811f5584bab2ab7255f89240f15dd4d1cb548b7ba0f53b434fee134499273e",
+    "versionCode": 49
   },
   {
     "name": "ArbxComix",
@@ -263,7 +276,8 @@
       }
     ],
     "size": 162430,
-    "sha256": "89f622c1b5849c5f71d0558c47f55bb300687fea3bdd0280f03c4d31218884b0"
+    "sha256": "89f622c1b5849c5f71d0558c47f55bb300687fea3bdd0280f03c4d31218884b0",
+    "versionCode": 54
   },
   {
     "name": "Arabs Hentai",
@@ -282,7 +296,8 @@
       }
     ],
     "size": 67792,
-    "sha256": "810afe596049925efcbfab9b823f2ade93ccbf756f71f4a535a53515f8f122da"
+    "sha256": "810afe596049925efcbfab9b823f2ade93ccbf756f71f4a535a53515f8f122da",
+    "versionCode": 6
   },
   {
     "name": "Manga Starz",
@@ -301,7 +316,8 @@
       }
     ],
     "size": 81095,
-    "sha256": "5e73ef6440ca8abc66c9e099d97aa0e6eb99431e0561c88fac7cee569b077ea0"
+    "sha256": "5e73ef6440ca8abc66c9e099d97aa0e6eb99431e0561c88fac7cee569b077ea0",
+    "versionCode": 63
   },
   {
     "name": "Mangalek",
@@ -320,7 +336,8 @@
       }
     ],
     "size": 90818,
-    "sha256": "8dbe2defbee39081628511d6f1194d2140abc81ee4d2f271a99578be4acbd6cb"
+    "sha256": "8dbe2defbee39081628511d6f1194d2140abc81ee4d2f271a99578be4acbd6cb",
+    "versionCode": 67
   },
   {
     "name": "ProComic",
@@ -339,7 +356,8 @@
       }
     ],
     "size": 136277,
-    "sha256": "3299064b69614797b50c590607b9d433b57b3cbd1a1982ea83738ffff334f1d6"
+    "sha256": "3299064b69614797b50c590607b9d433b57b3cbd1a1982ea83738ffff334f1d6",
+    "versionCode": 65
   },
   {
     "name": "3Hentai",
@@ -358,7 +376,8 @@
       }
     ],
     "size": 48069,
-    "sha256": "ef85baaf735844ced3820a424b0277bc7b894620cbc5ce950977220eebdd7a13"
+    "sha256": "ef85baaf735844ced3820a424b0277bc7b894620cbc5ce950977220eebdd7a13",
+    "versionCode": 7
   },
   {
     "name": "Akuma",
@@ -377,7 +396,8 @@
       }
     ],
     "size": 49927,
-    "sha256": "2ff2b8904a575ff69c52eace99b5718b539c7e8f2938b1f66d2de128c12db9bf"
+    "sha256": "2ff2b8904a575ff69c52eace99b5718b539c7e8f2938b1f66d2de128c12db9bf",
+    "versionCode": 12
   },
   {
     "name": "Hentai Slayer",
@@ -396,7 +416,8 @@
       }
     ],
     "size": 67974,
-    "sha256": "d5b8bbabcbaf8b378671631df5910b02af6a8d5f08b4a98e08e19a5db38ff96d"
+    "sha256": "d5b8bbabcbaf8b378671631df5910b02af6a8d5f08b4a98e08e19a5db38ff96d",
+    "versionCode": 8
   },
   {
     "name": "Hijala",
@@ -415,6 +436,7 @@
       }
     ],
     "size": 122742,
-    "sha256": "32419f6cd36a3b9adc75cf467bfd6cd09fa6a9224f6c8801a2d0240d2ed80042"
+    "sha256": "32419f6cd36a3b9adc75cf467bfd6cd09fa6a9224f6c8801a2d0240d2ed80042",
+    "versionCode": 37
   }
 ]
