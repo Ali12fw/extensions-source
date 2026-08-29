@@ -405,11 +405,11 @@
     {
       "name": "3Hentai",
       "pkg": "eu.kanade.tachiyomi.extension.all.hentai3",
-      "apk": "tachiyomi-all.hentai3-v1.4.8-release.apk",
+      "apk": "tachiyomi-all.hentai3-v1.4.9-release.apk",
       "lang": "all",
-      "code": 8,
-      "versionCode": 8,
-      "version": "1.4.8",
+      "code": 9,
+      "versionCode": 9,
+      "version": "1.4.9",
       "nsfw": 1,
       "hasReadme": 0,
       "hasChangelog": 0,
@@ -421,8 +421,8 @@
           "lang": "all"
         }
       ],
-      "size": 48176,
-      "sha256": "a2bc4070996fc9eaf4dc355e61742bedf23b4e3d9c299439c8abeff3817b4245"
+      "size": 48418,
+      "sha256": "7661496c4a4c42fe7956f174ef9602fe822b70aa73abb5b32e186f4a258c1d1d"
     },
     {
       "name": "Akuma",
