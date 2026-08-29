@@ -3,7 +3,8 @@
     "name": "Ali's Custom Extensions",
     "description": "Official customized manga extensions repository by Ali",
     "website": "https://ali12fw.github.io/extensions-source/",
-    "signing_key_fingerprint": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a"
+    "signing_key_fingerprint": "f1abd95dc7c7ccec26809be2c86232abb16b759b73f3a2d1268bae9ba0e9a46a",
+    "count": 22
   },
   "extensions": [
     {

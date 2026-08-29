@@ -2,11 +2,11 @@
   {
     "name": "3Hentai",
     "pkg": "eu.kanade.tachiyomi.extension.all.hentai3",
-    "apk": "tachiyomi-all.hentai3-v1.4.10-release.apk",
+    "apk": "tachiyomi-all.hentai3-v1.4.11-release.apk",
     "lang": "all",
     "code": 10,
-    "versionCode": 10,
-    "version": "1.4.10",
+    "versionCode": 11,
+    "version": "1.4.11",
     "nsfw": 1,
     "hasReadme": 0,
     "hasChangelog": 0,
@@ -18,8 +18,8 @@
         "lang": "all"
       }
     ],
-    "size": 48405,
-    "sha256": "c6af54b40292d8605322fdf6c84c31a6c336e577c820d4c15e0bb933ffa46ffa"
+    "size": 47,
+    "sha256": "1c2d0b26e67bb76e546d2f5e11f8044a306d253ad0f17b1c85e7ffacb9438289"
   },
   {
     "name": "Akuma",
@@ -134,11 +134,11 @@
   {
     "name": "Azora",
     "pkg": "eu.kanade.tachiyomi.extension.ar.azora",
-    "apk": "tachiyomi-ar.azora-v1.4.77-release.apk",
+    "apk": "tachiyomi-ar.azora-v1.4.78-release.apk",
     "lang": "ar",
     "code": 61,
-    "versionCode": 61,
-    "version": "1.4.77",
+    "versionCode": 62,
+    "version": "1.4.78",
     "nsfw": 0,
     "hasReadme": 0,
     "hasChangelog": 0,
@@ -150,8 +150,8 @@
         "lang": "ar"
       }
     ],
-    "size": 85450,
-    "sha256": "b9be89959413c75a9a7bc4cd104c371628e008d09e321fcac17c9f6238c9fff3"
+    "size": 83,
+    "sha256": "7a96a7d86b6a554f6eb8fe5fad4f46e4f5f554a71d587061c7e6d4df9d06dcad"
   },
   {
     "name": "Dilar",
@@ -310,11 +310,11 @@
   {
     "name": "Mangalek",
     "pkg": "eu.kanade.tachiyomi.extension.ar.mangalek",
-    "apk": "tachiyomi-ar.mangalek-v1.4.69-release.apk",
+    "apk": "tachiyomi-ar.mangalek-v1.4.70-release.apk",
     "lang": "ar",
     "code": 24,
-    "versionCode": 24,
-    "version": "1.4.69",
+    "versionCode": 25,
+    "version": "1.4.70",
     "nsfw": 0,
     "hasReadme": 0,
     "hasChangelog": 0,
@@ -326,8 +326,8 @@
         "lang": "ar"
       }
     ],
-    "size": 90859,
-    "sha256": "48ad88d8312a3fa7a8af09afc0f35cfdd6a0ba21c01f9e16fb65e037450da3db"
+    "size": 89,
+    "sha256": "81e09e746d52e06758a8de22882f512a1bee1a7c7632f3fd0e679288dbec7d00"
   },
   {
     "name": "MangaSwat",
@@ -354,11 +354,11 @@
   {
     "name": "MangaTime",
     "pkg": "eu.kanade.tachiyomi.extension.ar.mangatime",
-    "apk": "tachiyomi-ar.mangatime-v1.4.5-release.apk",
+    "apk": "tachiyomi-ar.mangatime-v1.4.6-release.apk",
     "lang": "ar",
     "code": 5,
-    "versionCode": 5,
-    "version": "1.4.5",
+    "versionCode": 6,
+    "version": "1.4.6",
     "nsfw": 0,
     "hasReadme": 0,
     "hasChangelog": 0,
@@ -370,8 +370,8 @@
         "lang": "ar"
       }
     ],
-    "size": 96156,
-    "sha256": "823fc6b905b59d158f905733f2659d39fc9a8e8106db635953a857463c11ae07"
+    "size": 94,
+    "sha256": "9a66e88ddb6ffb55ca3bd35e9bedd220e48c4c05865c07b21e8ebaa4070817b1"
   },
   {
     "name": "ProComic",
@@ -442,11 +442,11 @@
   {
     "name": "WaveTeamy",
     "pkg": "eu.kanade.tachiyomi.extension.ar.waveteamy",
-    "apk": "tachiyomi-ar.waveteamy-v1.4.7-release.apk",
+    "apk": "tachiyomi-ar.waveteamy-v1.4.8-release.apk",
     "lang": "ar",
     "code": 7,
-    "versionCode": 7,
-    "version": "1.4.7",
+    "versionCode": 8,
+    "version": "1.4.8",
     "nsfw": 0,
     "hasReadme": 0,
     "hasChangelog": 0,
@@ -458,8 +458,8 @@
         "lang": "ar"
       }
     ],
-    "size": 79184,
-    "sha256": "594eca258d1ddb9223722eaf811ebdc009402eb052214d66e9289bf74852668b"
+    "size": 77,
+    "sha256": "9337f28b15e8fe7518e23e4ef7d93fa31b03954d516db698cb62d595baf44ad0"
   },
   {
     "name": "Yona Bar",
