@@ -145,6 +145,12 @@ class InitialChapters(
 )
 
 @Serializable
+class ChapterListResponse(
+    val data: List<Chapter> = emptyList(),
+    val total: Int = 0,
+)
+
+@Serializable
 class Chapter(
     val id: Int,
     @SerialName("chapter_number")
@@ -159,6 +165,8 @@ class Chapter(
     val lockedByExclusive: Boolean? = false,
     @SerialName("uploader_nickname")
     val uploader: String? = null,
+    @SerialName("uploader_username")
+    val uploaderUsername: String? = null,
     @SerialName("created_at")
     val createdAt: String? = null,
 ) {

@@ -181,7 +181,7 @@ class ProChan : HttpSource() {
         .asObservableSuccess()
         .map(::popularMangaParse)
 
-    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/api/public/content/latest-updates?page=$page", headers)
+    override fun latestUpdatesRequest(page: Int): Request = GET("$baseUrl/api/public/content/latest-updates?page=$page&limit=50", headers)
 
     override fun latestUpdatesParse(response: Response): MangasPage {
         val data = response.parseAs<Data<List<LatestUpdate>>>().data
@@ -197,13 +197,20 @@ class ProChan : HttpSource() {
             }
             .toList()
 
-        val hasNextPage = data.size >= 18
+        val hasNextPage = data.size >= 50
         return MangasPage(mangas, hasNextPage)
     }
 
     override fun fetchLatestUpdates(page: Int): Observable<MangasPage> = client.newCall(latestUpdatesRequest(page))
         .asObservableSuccess()
         .map(::latestUpdatesParse)
+        .concatMap { mangasPage ->
+            if (mangasPage.mangas.isEmpty() && mangasPage.hasNextPage) {
+                fetchLatestUpdates(page + 1)
+            } else {
+                Observable.just(mangasPage)
+            }
+        }
 
     private val pageNumber = ConcurrentHashMap<String, Int>()
 
@@ -289,10 +296,12 @@ class ProChan : HttpSource() {
     }
 
     override fun searchMangaRequest(page: Int, query: String, filters: FilterList): Request {
-        val selectedType = filters.firstInstance<TypeFilter>().selected ?: "manga"
+        val selectedType = filters.filterIsInstance<TypeFilter>().firstOrNull()?.selected ?: "content"
+        val sortOrder = filters.filterIsInstance<SortFilter>().firstOrNull()?.selected
         val url = "$baseUrl/api/public/$selectedType".toHttpUrl().newBuilder().apply {
             addQueryParameter("limit", "20")
             addQueryParameter("page", page.toString())
+            sortOrder?.let { addQueryParameter("sort", it) }
             query.takeIf(String::isNotBlank)?.also { q ->
                 addQueryParameter("search", q)
             }
@@ -514,47 +523,111 @@ class ProChan : HttpSource() {
     override fun chapterListRequest(manga: SManga) = GET(getMangaUrl(manga), rscHeaders)
 
     override fun chapterListParse(response: Response): List<SChapter> {
-        val result = extractNextJsFollowingMove<InitialChapters>(response)
-        val data = result.data
-        val chapters = data.initialChapters.toMutableList()
-        val size = chapters.size
-        var page = 2
-        val sourceRouteUrl = generateSequence(response) { it.priorResponse }
+        val urls = generateSequence(response) { it.priorResponse }
             .map { it.request.url }
-            .firstOrNull { url ->
-                val sIdx = url.pathSegments.indexOf("series")
-                sIdx >= 0 && url.pathSegments.size > sIdx + 3
-            } ?: result.effectiveUrl
-        val path = sourceRouteUrl.pathSegments
-        val seriesIndex = path.indexOf("series")
-        val type = if (seriesIndex >= 0 && path.size > seriesIndex + 1) path[seriesIndex + 1] else "manga"
-        val id = if (seriesIndex >= 0 && path.size > seriesIndex + 2) path[seriesIndex + 2] else ""
-        val slug = if (seriesIndex >= 0 && path.size > seriesIndex + 3) path[seriesIndex + 3] else ""
-        val reqBaseUrl = "https://${result.effectiveUrl.host}"
+            .toList()
 
-        if (id.isNotBlank()) {
-            while (data.totalChapters > chapters.size) {
-                val request = GET("$reqBaseUrl/api/public/$type/$id/chapters?page=${page++}&limit=$size&order=desc", headers)
-                val nextChapters = client.newCall(request).execute()
-                    .also {
-                        if (!it.isSuccessful) {
-                            it.close()
-                            throw Exception("HTTP ${it.code}")
-                        }
-                    }
-                    .parseAs<Data<List<Chapter>>>()
+        var type = ""
+        var id = ""
+        var slug = ""
 
-                chapters.addAll(nextChapters.data)
+        for (url in urls) {
+            val path = url.pathSegments
+            val seriesIndex = path.indexOf("series")
+            if (seriesIndex >= 0 && path.size > seriesIndex + 3) {
+                val candidateType = path[seriesIndex + 1]
+                if (candidateType in SUPPORTED_TYPES) {
+                    type = candidateType
+                }
+                id = path[seriesIndex + 2]
+                slug = path[seriesIndex + 3]
+                break
             }
-
-            countViews(id)
         }
 
+        if (id.isBlank() || slug.isBlank()) {
+            for (url in urls) {
+                val lastSegment = url.pathSegments.lastOrNull()?.substringBefore("?") ?: ""
+                if ('-' in lastSegment) {
+                    val candidateId = lastSegment.substringAfterLast("-")
+                    if (candidateId.isNotEmpty() && candidateId.all { it.isDigit() }) {
+                        if (id.isBlank()) id = candidateId
+                        if (slug.isBlank()) slug = lastSegment.substringBeforeLast("-")
+                        break
+                    }
+                }
+            }
+        }
+
+        if (id.isBlank()) {
+            for (url in urls) {
+                val numericSegment = url.pathSegments.reversed().firstOrNull { seg ->
+                    seg.isNotEmpty() && seg.all { it.isDigit() }
+                }
+                if (numericSegment != null) {
+                    id = numericSegment
+                    break
+                }
+            }
+        }
+
+        if (id.isBlank()) {
+            throw IOException("ProComic: could not determine series ID from ${response.request.url}")
+        }
+
+        val reqBaseUrl = "https://${response.request.url.host}"
+        val candidateTypes = if (type in SUPPORTED_TYPES) {
+            listOf(type) + (SUPPORTED_TYPES - type)
+        } else {
+            SUPPORTED_TYPES.toList()
+        }
+
+        var resolvedType = type
+        var firstPageResponse: ChapterListResponse? = null
+
+        for (candidate in candidateTypes) {
+            val request = GET("$reqBaseUrl/api/public/$candidate/$id/chapters?page=1&limit=50&order=desc", headers)
+            val resp = client.newCall(request).execute()
+            if (resp.isSuccessful) {
+                firstPageResponse = resp.parseAs<ChapterListResponse>()
+                resolvedType = candidate
+                break
+            } else {
+                resp.close()
+            }
+        }
+
+        if (firstPageResponse == null) {
+            throw IOException("ProComic: failed to fetch chapters for series $id")
+        }
+
+        val chapters = firstPageResponse.data.toMutableList()
+        val totalChapters = firstPageResponse.total
+        var page = 2
+
+        while ((totalChapters > 0 && chapters.size < totalChapters) || (totalChapters == 0 && chapters.size % 50 == 0)) {
+            if (chapters.isEmpty() || firstPageResponse.data.size < 50) break
+            val request = GET("$reqBaseUrl/api/public/$resolvedType/$id/chapters?page=${page++}&limit=50&order=desc", headers)
+            val nextBatch = client.newCall(request).execute().use { resp ->
+                if (!resp.isSuccessful) {
+                    throw IOException("HTTP ${resp.code}")
+                }
+                resp.parseAs<ChapterListResponse>()
+            }
+            if (nextBatch.data.isEmpty()) break
+            chapters.addAll(nextBatch.data)
+            if (nextBatch.data.size < 50) break
+        }
+
+        countViews(id)
+
+        val finalSlug = slug.takeIf { it.isNotBlank() } ?: id
+
         return chapters
-            .filter { it.language == "AR" }
+            .filter { it.language.equals("AR", ignoreCase = true) }
             .map { chapter ->
                 SChapter.create().apply {
-                    url = "/ar/series/$type/$id/$slug/${chapter.id}/${chapter.number}"
+                    url = "/ar/series/$resolvedType/$id/$finalSlug/${chapter.id}/${chapter.number}"
                     name = buildString {
                         append("\u200F") // rtl marker
 
@@ -574,7 +647,7 @@ class ProChan : HttpSource() {
                             }
                         }
                     }
-                    scanlator = chapter.uploader ?: "\u200B"
+                    scanlator = chapter.uploader?.takeIf { it.isNotBlank() } ?: chapter.uploaderUsername ?: "\u200B"
                     chapter_number = chapter.number.toFloatOrNull() ?: 0f
                     date_upload = dateFormat.tryParse(chapter.createdAt)
                 }
@@ -1171,11 +1244,15 @@ private val JSON_MEDIA_TYPE = "application/json".toMediaType()
 private val TURNSTILE_MODES = setOf("hidden", "visible")
 private val MOBILE_REGEX = Regex("mobile|android|iphone|ipad|ipod", RegexOption.IGNORE_CASE)
 private val TABLES_REGEX = Regex("tablet", RegexOption.IGNORE_CASE)
+private val NEXT_REDIRECT_REGEX = Regex("""NEXT_REDIRECT;(?:replace|push);([^;]+);""")
 private val MOVED_RSC_TARGET_URL_REGEX = Regex(""""targetUrl"\s*:\s*"(https?:\/\/[^"]+)"""")
 private val MOVED_HOST_REGEX = Regex("""var\s+h\s*=\s*\[(.*?)\]\.join\(['"]['"]\)""")
 private val MOVED_PATH_REGEX = Regex("""var\s+u\s*=\s*['"]https:\/\/['"]\s*\+\s*h\s*\+\s*['"]([^'"]+)['"]""")
 
 private fun parseMovedBounceTargetUrl(bodyString: String): String? {
+    NEXT_REDIRECT_REGEX.find(bodyString)?.groupValues?.get(1)?.let {
+        return if (it.startsWith("http")) it else "https://procomic.net$it"
+    }
     MOVED_RSC_TARGET_URL_REGEX.find(bodyString)?.groupValues?.get(1)?.let { return it }
 
     val hostMatch = MOVED_HOST_REGEX.find(bodyString) ?: return null
