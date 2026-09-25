@@ -384,11 +384,11 @@
     {
       "name": "ProComic",
       "pkg": "eu.kanade.tachiyomi.extension.ar.mangapro",
-      "apk": "tachiyomi-ar.mangapro-v1.4.67-release.apk",
+      "apk": "tachiyomi-ar.mangapro-v1.4.68-release.apk",
       "lang": "ar",
-      "code": 67,
-      "versionCode": 67,
-      "version": "1.4.67",
+      "code": 68,
+      "versionCode": 68,
+      "version": "1.4.68",
       "nsfw": 0,
       "hasReadme": 0,
       "hasChangelog": 0,
@@ -400,8 +400,8 @@
           "lang": "ar"
         }
       ],
-      "size": 136271,
-      "sha256": "c1c5110d4144db1f65e8b0562bd4db7c787f1aae07091d96fc934ffa32ac28f4"
+      "size": 136468,
+      "sha256": "8ff0e483b52cfe2facd43b29ab716cbeedc10cd6b053c79daa0e7f0761c8e262"
     },
     {
       "name": "Team X",
